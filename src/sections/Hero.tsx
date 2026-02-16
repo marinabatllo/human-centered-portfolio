@@ -1,6 +1,7 @@
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from '@/lib/router';
 import { Reveal } from '@/components/ui-custom/Reveal';
+import { HeroAnimation } from '@/components/ui-custom/HeroAnimation';
 
 export function Hero() {
   return (
@@ -52,9 +53,9 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Background icon — gentle float animation */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none animate-float">
-        <Sparkles size={600} strokeWidth={0.5} className="text-primary" />
+      {/* Custom localized background animation */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <HeroAnimation />
       </div>
     </section>
   );
