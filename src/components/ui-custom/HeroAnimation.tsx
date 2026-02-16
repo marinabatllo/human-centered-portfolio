@@ -2,14 +2,14 @@ import { useEffect, useRef } from 'react';
 
 /* ─── Config ─── */
 const COLORS = [
-    '#B58CC8', // Plum
-    '#FF857E', // Coral
-    '#F0C965', // Gold
+    'rgba(181, 140, 200, 0.4)', // Softer Plum
+    'rgba(255, 133, 126, 0.4)', // Softer Coral
+    'rgba(240, 201, 101, 0.4)', // Softer Gold
 ];
 
-const PARTICLE_COUNT = 3000;
-const MORPH_SPEED = 0.05; // Smoothing for morph transitions
-const ROTATION_SPEED = 0.002;
+const PARTICLE_COUNT = 4000;
+const MORPH_SPEED = 0.03;
+const ROTATION_SPEED = 0.001;
 
 interface Particle {
     x: number;
@@ -18,9 +18,6 @@ interface Particle {
     tx: number; // target x
     ty: number; // target y
     tz: number; // target z
-    vx: number;
-    vy: number;
-    vz: number;
     size: number;
     color: string;
 }
@@ -32,60 +29,71 @@ export function HeroAnimation() {
     const particlesRef = useRef<Particle[]>([]);
     const currentShapeRef = useRef<Shape>('brain');
     const animRef = useRef<number>(0);
-    const timeRef = useRef(0);
     const rotationRef = useRef({ x: 0, y: 0 });
 
-    // Generate points for different shapes
     const getShapePoints = (shape: Shape, w: number, h: number): { x: number; y: number; z: number }[] => {
         const points: { x: number; y: number; z: number }[] = [];
-        const size = Math.min(w, h) * 0.65; // High scale for visibility
+        const baseSize = Math.min(w, h) * 0.75;
 
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             let x = 0, y = 0, z = 0;
 
             if (shape === 'brain') {
+                // More detailed brain lobes
                 const lobe = Math.random() > 0.5 ? 1 : -1;
                 const u = Math.random() * Math.PI * 2;
                 const v = Math.random() * Math.PI;
-                x = (size * 0.8 * Math.sin(v) * Math.cos(u) * 0.7) + (lobe * size * 0.3);
-                y = (size * Math.sin(v) * Math.sin(u) * 1.2);
-                z = (size * 0.8 * Math.cos(v) * 0.8);
-                x += Math.sin(v * 10) * 15;
-                y += Math.cos(u * 10) * 15;
+                // Extended horizontally and centered
+                x = (baseSize * 1.2 * Math.sin(v) * Math.cos(u) * 0.7) + (lobe * baseSize * 0.35);
+                y = (baseSize * Math.sin(v) * Math.sin(u) * 1.1);
+                z = (baseSize * 0.7 * Math.cos(v));
+                // Add texture
+                x += Math.sin(v * 12) * 20;
+                y += Math.cos(u * 12) * 20;
             } else if (shape === 'graph') {
-                const clusterCount = 8;
+                // Wide horizontal network clusters
+                const clusterCount = 12;
                 const clusterIdx = i % clusterCount;
                 const angle = (clusterIdx / clusterCount) * Math.PI * 2;
-                const radius = i % 2 === 0 ? size * 1.2 : size * 0.6;
-                const cx = Math.cos(angle) * radius;
-                const cy = Math.sin(angle) * radius;
-                const cz = (Math.random() - 0.5) * size * 1.5;
-                const spread = size * 0.5;
+                // Full width spread
+                const radiusX = (i % 3 === 0 ? w * 0.45 : w * 0.25);
+                const radiusY = (i % 3 === 0 ? h * 0.4 : h * 0.15);
+                const cx = Math.cos(angle) * radiusX;
+                const cy = Math.sin(angle) * radiusY;
+                const cz = (Math.random() - 0.5) * baseSize;
+                const spread = baseSize * 0.4;
                 x = cx + (Math.random() - 0.5) * spread;
                 y = cy + (Math.random() - 0.5) * spread;
                 z = cz + (Math.random() - 0.5) * spread;
             } else if (shape === 'app') {
-                const face = Math.floor(Math.random() * 6);
+                // 3D Wireframe App Window - wide and tall
                 const u = (Math.random() - 0.5) * 2;
                 const v = (Math.random() - 0.5) * 2;
-                const depth = 0.2;
-                if (face === 0) { x = u * size * 1.4; y = v * size * 0.9; z = size * depth; }
-                else if (face === 1) { x = u * size * 1.4; y = v * size * 0.9; z = -size * depth; }
-                else if (face === 2) { x = size * 1.4; y = u * size * 0.9; z = v * size * depth; }
-                else if (face === 3) { x = -size * 1.4; y = u * size * 0.9; z = v * size * depth; }
-                else if (face === 4) { x = u * size * 1.4; y = size * 0.9; z = v * size * depth; }
-                else { x = u * size * 1.4; y = -size * 0.9; z = v * size * depth; }
+                const face = Math.floor(Math.random() * 6);
+                const width = w * 0.45;
+                const height = h * 0.45;
+                const depth = baseSize * 0.15;
+
+                if (face === 0) { x = u * width; y = v * height; z = depth; }
+                else if (face === 1) { x = u * width; y = v * height; z = -depth; }
+                else if (face === 2) { x = width; y = u * height; z = v * depth; }
+                else if (face === 3) { x = -width; y = u * height; z = v * depth; }
+                else if (face === 4) { x = u * width; y = height; z = v * depth; }
+                else { x = u * width; y = -height; z = v * depth; }
             } else if (shape === 'ai') {
+                // Centered AI Halo / Sparkle
                 if (i < PARTICLE_COUNT * 0.4) {
-                    x = (Math.random() - 0.5) * size * 0.6;
-                    y = (Math.random() - 0.5) * size * 0.6;
-                    z = (Math.random() - 0.5) * size * 0.6;
+                    // Denser central core
+                    x = (Math.random() - 0.5) * baseSize * 0.5;
+                    y = (Math.random() - 0.5) * baseSize * 0.5;
+                    z = (Math.random() - 0.5) * baseSize * 0.5;
                 } else {
+                    // Wide energy ring
                     const angle = Math.random() * Math.PI * 2;
                     const phi = Math.acos(2 * Math.random() - 1);
-                    x = size * 1.4 * Math.sin(phi) * Math.cos(angle);
-                    y = size * 1.4 * Math.sin(phi) * Math.sin(angle);
-                    z = size * 1.4 * Math.cos(phi);
+                    x = baseSize * 1.6 * Math.sin(phi) * Math.cos(angle);
+                    y = baseSize * 1.2 * Math.sin(phi) * Math.sin(angle);
+                    z = baseSize * 1.0 * Math.cos(phi);
                 }
             }
             points.push({ x, y, z });
@@ -108,10 +116,11 @@ export function HeroAnimation() {
             if (particlesRef.current.length === 0) {
                 const initialPoints = getShapePoints('brain', window.innerWidth, window.innerHeight);
                 particlesRef.current = initialPoints.map(p => ({
-                    x: p.x, y: p.y, z: p.z,
+                    x: (Math.random() - 0.5) * window.innerWidth,
+                    y: (Math.random() - 0.5) * window.innerHeight,
+                    z: (Math.random() - 0.5) * 1000,
                     tx: p.x, ty: p.y, tz: p.z,
-                    vx: 0, vy: 0, vz: 0,
-                    size: Math.random() * 2.5 + 1.2,
+                    size: Math.random() * 1.2 + 0.8, // Smaller particles: 0.8 - 2.0px
                     color: COLORS[Math.floor(Math.random() * COLORS.length)]
                 }));
             }
@@ -120,7 +129,7 @@ export function HeroAnimation() {
         resize();
         window.addEventListener('resize', resize);
 
-        const shapes: Shape[] = ['brain', 'graph', 'app', 'ai'];
+        const shapes: Shape[] = ['graph', 'brain', 'ai', 'app'];
         let shapeIdx = 0;
 
         const cycleShape = () => {
@@ -134,17 +143,17 @@ export function HeroAnimation() {
             });
         };
 
-        const interval = setInterval(cycleShape, 6000);
+        const interval = setInterval(cycleShape, 7000);
 
-        const animate = (t: number) => {
-            timeRef.current = t;
+        const animate = () => {
             const w = window.innerWidth;
             const h = window.innerHeight;
 
+            // CLEAR THE CANVAS COMPLETELY FOR THEME COMPATIBILITY
             ctx.clearRect(0, 0, w, h);
 
             rotationRef.current.y += ROTATION_SPEED;
-            rotationRef.current.x += ROTATION_SPEED * 0.5;
+            rotationRef.current.x += ROTATION_SPEED * 0.3;
 
             const cosY = Math.cos(rotationRef.current.y);
             const sinY = Math.sin(rotationRef.current.y);
@@ -156,24 +165,20 @@ export function HeroAnimation() {
                 p.y += (p.ty - p.y) * MORPH_SPEED;
                 p.z += (p.tz - p.z) * MORPH_SPEED;
 
-                let x = p.x;
-                let y = p.y;
-                let z = p.z;
+                let xRotY = p.x * cosY - p.z * sinY;
+                let zRotY = p.x * sinY + p.z * cosY;
+                let yRotX = p.y * cosX - zRotY * sinX;
+                let zRotX = p.y * sinX + zRotY * cosX;
 
-                let x1 = x * cosY - z * sinY;
-                let z1 = x * sinY + z * cosY;
-                let y2 = y * cosX - z1 * sinX;
-                let z2 = y * sinX + z1 * cosX;
-
-                const perspective = 1200 / (1200 + z2);
-                const px = x1 * perspective + w / 2;
-                const py = y2 * perspective + h / 2;
+                const perspective = 1200 / (1200 + zRotX);
+                const px = xRotY * perspective + w / 2;
+                const py = yRotX * perspective + h / 2;
 
                 if (perspective > 0) {
                     ctx.beginPath();
                     ctx.arc(px, py, p.size * perspective, 0, Math.PI * 2);
                     ctx.fillStyle = p.color;
-                    ctx.globalAlpha = Math.max(0, perspective * 0.85);
+                    ctx.globalAlpha = Math.min(0.6, perspective * 0.5); // Lower alpha for softening
                     ctx.fill();
                 }
             });
@@ -194,7 +199,7 @@ export function HeroAnimation() {
         <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full pointer-events-none"
-            style={{ opacity: 1.0 }}
+            style={{ opacity: 1.0, zIndex: 0 }}
         />
     );
 }
