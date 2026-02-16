@@ -1,221 +1,195 @@
 import { useEffect, useRef } from 'react';
 
 /* ─── Config ─── */
-const COLORS = {
-    plum: '#B58CC8',
-    coral: '#FF857E',
-    gold: '#F0C965',
-};
+const COLORS = [
+    '#B58CC8', // Plum
+    '#FF857E', // Coral
+    '#F0C965', // Gold
+];
 
-interface FloatingNode {
-    x: number;
-    y: number;
-    baseX: number;
-    baseY: number;
-    radius: number;
-    label: string;
-    color: string;
-    speed: number;
-    phase: number;
-    orbit: number;
-}
+const PARTICLE_COUNT = 1500;
+const MORPH_SPEED = 0.05; // Smoothing for morph transitions
+const ROTATION_SPEED = 0.002;
 
 interface Particle {
     x: number;
     y: number;
+    z: number;
+    tx: number; // target x
+    ty: number; // target y
+    tz: number; // target z
     vx: number;
     vy: number;
-    life: number;
-    maxLife: number;
-    color: string;
+    vz: number;
     size: number;
+    color: string;
 }
 
-const NODE_DATA: { label: string; color: string }[] = [
-    // Industries
-    { label: 'Healthcare', color: COLORS.plum },
-    { label: 'FMCG', color: COLORS.coral },
-    { label: 'Consulting', color: COLORS.gold },
-    // Deliverables
-    { label: 'ML Models', color: COLORS.plum },
-    { label: 'Data Pipelines', color: COLORS.coral },
-    { label: 'BI Dashboards', color: COLORS.gold },
-    // Tools / Skills
-    { label: 'Python', color: COLORS.plum },
-    { label: 'React', color: COLORS.coral },
-    { label: 'TensorFlow', color: COLORS.gold },
-    { label: 'UX Design', color: COLORS.plum },
-    { label: 'Strategy', color: COLORS.coral },
-    { label: 'AI', color: COLORS.gold },
-];
-
-function createNodes(w: number, h: number): FloatingNode[] {
-    return NODE_DATA.map((data, i) => {
-        const angle = (i / NODE_DATA.length) * Math.PI * 2;
-        const radiusFromCenter = Math.min(w, h) * (0.25 + Math.random() * 0.2);
-        const cx = w / 2;
-        const cy = h / 2;
-        return {
-            x: cx + Math.cos(angle) * radiusFromCenter,
-            y: cy + Math.sin(angle) * radiusFromCenter,
-            baseX: cx + Math.cos(angle) * radiusFromCenter,
-            baseY: cy + Math.sin(angle) * radiusFromCenter,
-            radius: 3 + Math.random() * 4,
-            label: data.label,
-            color: data.color,
-            speed: 0.0003 + Math.random() * 0.0004,
-            phase: Math.random() * Math.PI * 2,
-            orbit: 15 + Math.random() * 30,
-        };
-    });
-}
+type Shape = 'brain' | 'graph' | 'app' | 'ai';
 
 export function HeroAnimation() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const animRef = useRef<number>(0);
-    const nodesRef = useRef<FloatingNode[]>([]);
     const particlesRef = useRef<Particle[]>([]);
-    const mouseRef = useRef({ x: -1000, y: -1000 });
+    const currentShapeRef = useRef<Shape>('brain');
+    const animRef = useRef<number>(0);
     const timeRef = useRef(0);
+    const rotationRef = useRef({ x: 0, y: 0 });
+
+    // Generate points for different shapes
+    const getShapePoints = (shape: Shape, w: number, h: number): { x: number; y: number; z: number }[] => {
+        const points: { x: number; y: number; z: number }[] = [];
+        const size = Math.min(w, h) * 0.35;
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            let x = 0, y = 0, z = 0;
+
+            if (shape === 'brain') {
+                // Parametric brain (two lobes)
+                const lobe = Math.random() > 0.5 ? 1 : -1;
+                const u = Math.random() * Math.PI * 2;
+                const v = Math.random() * Math.PI;
+                x = (size * 0.8 * Math.sin(v) * Math.cos(u) * 0.7) + (lobe * size * 0.3);
+                y = (size * Math.sin(v) * Math.sin(u) * 1.2);
+                z = (size * 0.8 * Math.cos(v) * 0.8);
+                // Add some "folds" texture
+                x += Math.sin(v * 10) * 10;
+                y += Math.cos(u * 10) * 10;
+            } else if (shape === 'graph') {
+                // Clustered data nodes
+                const clusterCount = 5;
+                const clusterIdx = i % clusterCount;
+                const angle = (clusterIdx / clusterCount) * Math.PI * 2;
+                const cx = Math.cos(angle) * size * 0.8;
+                const cy = Math.sin(angle) * size * 0.8;
+                const cz = (Math.random() - 0.5) * size;
+                const spread = size * 0.3;
+                x = cx + (Math.random() - 0.5) * spread;
+                y = cy + (Math.random() - 0.5) * spread;
+                z = cz + (Math.random() - 0.5) * spread;
+            } else if (shape === 'app') {
+                // Rectangle / Application window
+                const face = Math.floor(Math.random() * 6);
+                const u = (Math.random() - 0.5) * 2;
+                const v = (Math.random() - 0.5) * 2;
+                const depth = 0.1;
+                if (face === 0) { x = u * size; y = v * size * 0.7; z = size * depth; }
+                else if (face === 1) { x = u * size; y = v * size * 0.7; z = -size * depth; }
+                else if (face === 2) { x = size; y = u * size * 0.7; z = v * size * depth; }
+                else if (face === 3) { x = -size; y = u * size * 0.7; z = v * size * depth; }
+                else if (face === 4) { x = u * size; y = size * 0.7; z = v * size * depth; }
+                else { x = u * size; y = -size * 0.7; z = v * size * depth; }
+            } else if (shape === 'ai') {
+                // AI Icon: Sparkle burst inside a circle
+                if (i < PARTICLE_COUNT * 0.3) {
+                    // Central core/chip
+                    x = (Math.random() - 0.5) * size * 0.4;
+                    y = (Math.random() - 0.5) * size * 0.4;
+                    z = (Math.random() - 0.5) * size * 0.4;
+                } else {
+                    // Circuit circle
+                    const angle = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    x = size * Math.sin(phi) * Math.cos(angle);
+                    y = size * Math.sin(phi) * Math.sin(angle);
+                    z = size * Math.cos(phi);
+                }
+            }
+            points.push({ x, y, z });
+        }
+        return points;
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         const resize = () => {
             const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
             ctx.scale(dpr, dpr);
-            nodesRef.current = createNodes(rect.width, rect.height);
+
+            // Initialize particles
+            if (particlesRef.current.length === 0) {
+                const initialPoints = getShapePoints('brain', window.innerWidth, window.innerHeight);
+                particlesRef.current = initialPoints.map(p => ({
+                    x: p.x, y: p.y, z: p.z,
+                    tx: p.x, ty: p.y, tz: p.z,
+                    vx: 0, vy: 0, vz: 0,
+                    size: Math.random() * 1.5 + 0.5,
+                    color: COLORS[Math.floor(Math.random() * COLORS.length)]
+                }));
+            }
         };
 
         resize();
         window.addEventListener('resize', resize);
 
-        const handleMouse = (e: MouseEvent) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-        };
-        canvas.addEventListener('mousemove', handleMouse);
+        const shapes: Shape[] = ['brain', 'graph', 'app', 'ai'];
+        let shapeIdx = 0;
 
-        // Spawn particles occasionally
-        const spawnParticle = () => {
-            const rect = canvas.getBoundingClientRect();
-            if (particlesRef.current.length < 30) {
-                const color = [COLORS.plum, COLORS.coral, COLORS.gold][Math.floor(Math.random() * 3)];
-                particlesRef.current.push({
-                    x: Math.random() * rect.width,
-                    y: Math.random() * rect.height,
-                    vx: (Math.random() - 0.5) * 0.3,
-                    vy: (Math.random() - 0.5) * 0.3,
-                    life: 0,
-                    maxLife: 3000 + Math.random() * 4000,
-                    color,
-                    size: 1 + Math.random() * 2,
-                });
-            }
+        const cycleShape = () => {
+            shapeIdx = (shapeIdx + 1) % shapes.length;
+            currentShapeRef.current = shapes[shapeIdx];
+            const newPoints = getShapePoints(currentShapeRef.current, window.innerWidth, window.innerHeight);
+            particlesRef.current.forEach((p, i) => {
+                p.tx = newPoints[i].x;
+                p.ty = newPoints[i].y;
+                p.tz = newPoints[i].z;
+            });
         };
 
-        const animate = (timestamp: number) => {
-            const dt = timestamp - timeRef.current;
-            timeRef.current = timestamp;
-            const rect = canvas.getBoundingClientRect();
-            const w = rect.width;
-            const h = rect.height;
+        const interval = setInterval(cycleShape, 6000);
+
+        const animate = (t: number) => {
+            timeRef.current = t;
+            const w = window.innerWidth;
+            const h = window.innerHeight;
 
             ctx.clearRect(0, 0, w, h);
 
-            // Update nodes — gentle orbiting
-            nodesRef.current.forEach((node) => {
-                node.phase += node.speed * dt;
-                node.x = node.baseX + Math.cos(node.phase) * node.orbit;
-                node.y = node.baseY + Math.sin(node.phase * 0.7) * node.orbit * 0.6;
+            rotationRef.current.y += ROTATION_SPEED;
+            rotationRef.current.x += ROTATION_SPEED * 0.5;
 
-                // Mouse repulsion
-                const dx = node.x - mouseRef.current.x;
-                const dy = node.y - mouseRef.current.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    const force = (120 - dist) / 120;
-                    node.x += dx * force * 0.05;
-                    node.y += dy * force * 0.05;
+            const cosY = Math.cos(rotationRef.current.y);
+            const sinY = Math.sin(rotationRef.current.y);
+            const cosX = Math.cos(rotationRef.current.x);
+            const sinX = Math.sin(rotationRef.current.x);
+
+            ctx.fillStyle = ctx.strokeStyle = 'white'; // Fallback
+
+            particlesRef.current.forEach(p => {
+                // Morph logic
+                p.x += (p.tx - p.x) * MORPH_SPEED;
+                p.y += (p.ty - p.y) * MORPH_SPEED;
+                p.z += (p.tz - p.z) * MORPH_SPEED;
+
+                // 3D Projection
+                let x = p.x;
+                let y = p.y;
+                let z = p.z;
+
+                // Rotate Y
+                let x1 = x * cosY - z * sinY;
+                let z1 = x * sinY + z * cosY;
+
+                // Rotate X
+                let y2 = y * cosX - z1 * sinX;
+                let z2 = y * sinX + z1 * cosX;
+
+                const perspective = 1000 / (1000 + z2);
+                const px = x1 * perspective + w / 2;
+                const py = y2 * perspective + h / 2;
+
+                if (perspective > 0) {
+                    ctx.beginPath();
+                    ctx.arc(px, py, p.size * perspective, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = Math.max(0, perspective * 0.4);
+                    ctx.fill();
                 }
-            });
-
-            // Draw connections
-            const nodes = nodesRef.current;
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    const maxDist = Math.min(w, h) * 0.35;
-
-                    if (dist < maxDist) {
-                        const alpha = (1 - dist / maxDist) * 0.08;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `${nodes[i].color}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Draw nodes
-            nodes.forEach((node) => {
-                // Glow
-                const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 6);
-                gradient.addColorStop(0, `${node.color}18`);
-                gradient.addColorStop(1, `${node.color}00`);
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius * 6, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-
-                // Core dot
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `${node.color}60`;
-                ctx.fill();
-
-                // Pulsing ring
-                const pulseScale = 1 + Math.sin(node.phase * 3) * 0.3;
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius * pulseScale * 1.8, 0, Math.PI * 2);
-                ctx.strokeStyle = `${node.color}15`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-
-                // Label
-                ctx.font = '9px monospace';
-                ctx.fillStyle = `${node.color}35`;
-                ctx.textAlign = 'center';
-                ctx.fillText(node.label.toUpperCase(), node.x, node.y - node.radius * 3);
-            });
-
-            // Update and draw particles
-            if (Math.random() < 0.02) spawnParticle();
-
-            particlesRef.current = particlesRef.current.filter((p) => p.life < p.maxLife);
-            particlesRef.current.forEach((p) => {
-                p.life += dt;
-                p.x += p.vx;
-                p.y += p.vy;
-
-                const progress = p.life / p.maxLife;
-                const alpha = progress < 0.2 ? progress / 0.2 : progress > 0.8 ? (1 - progress) / 0.2 : 1;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `${p.color}${Math.floor(alpha * 30).toString(16).padStart(2, '0')}`;
-                ctx.fill();
             });
 
             animRef.current = requestAnimationFrame(animate);
@@ -226,15 +200,15 @@ export function HeroAnimation() {
         return () => {
             cancelAnimationFrame(animRef.current);
             window.removeEventListener('resize', resize);
-            canvas.removeEventListener('mousemove', handleMouse);
+            clearInterval(interval);
         };
     }, []);
 
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full pointer-events-auto"
-            style={{ opacity: 0.6 }}
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ opacity: 0.8 }}
         />
     );
 }
