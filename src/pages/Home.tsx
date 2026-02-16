@@ -17,7 +17,7 @@ export function Home() {
       <div className="precision-line-right hidden xl:block" />
 
       {/* Content with generous clinical spacing */}
-      <div className="max-w-7xl mx-auto px-8 relative z-10 space-y-64 pt-24">
+      <div className="max-w-7xl mx-auto px-8 relative z-10 space-y-28 pt-24">
         <Hero />
         <TechCarousel />
         <Proof />

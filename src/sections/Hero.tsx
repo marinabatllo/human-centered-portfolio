@@ -8,7 +8,7 @@ export function Hero() {
       <div className="max-w-6xl relative z-10">
         {/* Status badge + role label */}
         <Reveal delay={0} y={20}>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-12">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8">
             <div className="px-3 py-1 rounded-full border border-foreground/10 font-mono text-[9px] uppercase tracking-widest flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
               Available for Work
@@ -21,7 +21,7 @@ export function Hero() {
 
         {/* Massive headline */}
         <Reveal delay={150} y={60} duration={1000}>
-          <h1 className="text-hero font-light leading-[0.8] tracking-tighter mb-16">
+          <h1 className="text-hero font-light leading-[0.8] tracking-tighter mb-10">
             DATA TO<br />
             <span className="text-primary">REAL-WORLD</span><br />
             IMPACT<span className="font-serif italic text-secondary">.</span>

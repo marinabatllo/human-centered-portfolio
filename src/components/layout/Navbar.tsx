@@ -7,7 +7,6 @@ const navLinks = [
   { href: '/', label: 'home' },
   { href: '/projects', label: 'projects' },
   { href: '/about', label: 'about' },
-  { href: '/cv', label: 'cv' },
   { href: '/contact', label: 'contact' },
 ];
 
@@ -45,8 +44,8 @@ export function Navbar() {
               key={link.href}
               to={link.href}
               className={`transition-all hover:opacity-100 ${isActive(link.href)
-                  ? 'opacity-100 font-serif italic text-sm lowercase tracking-normal text-primary'
-                  : ''
+                ? 'opacity-100 font-serif italic text-sm lowercase tracking-normal text-primary'
+                : ''
                 }`}
             >
               {link.label}

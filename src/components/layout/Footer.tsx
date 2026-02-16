@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer
       ref={ref}
-      className="mt-64 border-t border-border py-24 px-8"
+      className="mt-28 border-t border-border py-24 px-8"
       style={{
         opacity: isInView ? 1 : 0,
         transform: isInView ? 'translateY(0)' : 'translateY(40px)',
