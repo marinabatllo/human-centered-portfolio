@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState, memo, CSSProperties, ReactNode } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 const ANIMATION_CONFIG = {
   SMOOTH_TAU: 0.25,
@@ -53,7 +54,7 @@ const cx = (...parts: (string | boolean | undefined)[]): string =>
 
 const useResizeObserver = (
   callback: () => void,
-  elements: React.RefObject<HTMLElement>[],
+  elements: React.RefObject<HTMLElement | null>[],
   dependencies: unknown[]
 ) => {
   useEffect(() => {
@@ -79,7 +80,7 @@ const useResizeObserver = (
 };
 
 const useImageLoader = (
-  seqRef: React.RefObject<HTMLElement>,
+  seqRef: React.RefObject<HTMLElement | null>,
   onLoad: () => void,
   dependencies: unknown[]
 ) => {
@@ -119,7 +120,7 @@ const useImageLoader = (
 };
 
 const useAnimationLoop = (
-  trackRef: React.RefObject<HTMLDivElement>,
+  trackRef: React.RefObject<HTMLDivElement | null>,
   targetVelocity: number,
   seqWidth: number,
   seqHeight: number,

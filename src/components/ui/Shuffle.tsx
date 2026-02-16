@@ -35,7 +35,7 @@ interface ShuffleProps {
     ease?: string;
     threshold?: number;
     rootMargin?: string;
-    tag?: keyof JSX.IntrinsicElements;
+    tag?: keyof React.JSX.IntrinsicElements;
     textAlign?: 'left' | 'center' | 'right';
     onShuffleComplete?: () => void;
     shuffleTimes?: number;
@@ -291,9 +291,9 @@ const Shuffle: React.FC<ShuffleProps> = ({
                     onRepeat: () => {
                         if (scrambleCharset) randomizeScrambles();
                         if (isVertical) {
-                            gsap.set(strips, { y: (i, t) => parseFloat(t.getAttribute('data-start-y') || '0') });
+                            gsap.set(strips, { y: (_i: number, t: Element) => parseFloat(t.getAttribute('data-start-y') || '0') });
                         } else {
-                            gsap.set(strips, { x: (i, t) => parseFloat(t.getAttribute('data-start-x') || '0') });
+                            gsap.set(strips, { x: (_i: number, t: Element) => parseFloat(t.getAttribute('data-start-x') || '0') });
                         }
                         onShuffleComplete?.();
                     },
@@ -316,9 +316,9 @@ const Shuffle: React.FC<ShuffleProps> = ({
                         stagger: animationMode === 'evenodd' ? stagger : 0
                     };
                     if (isVertical) {
-                        vars.y = (i: number, t: HTMLElement) => parseFloat(t.getAttribute('data-final-y') || '0');
+                        vars.y = (_i: number, t: HTMLElement) => parseFloat(t.getAttribute('data-final-y') || '0');
                     } else {
-                        vars.x = (i: number, t: HTMLElement) => parseFloat(t.getAttribute('data-final-x') || '0');
+                        vars.x = (_i: number, t: HTMLElement) => parseFloat(t.getAttribute('data-final-x') || '0');
                     }
 
                     tl.to(targets, vars, at);
@@ -419,7 +419,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
     const Tag = tag || 'p';
     const commonStyle = useMemo(() => ({ textAlign, ...style }), [textAlign, style]);
 
-    return React.createElement(Tag, { ref: ref as any, className: classes, style: commonStyle }, text);
+    return React.createElement(Tag as string, { ref: ref as any, className: classes, style: commonStyle }, text);
 };
 
 export default Shuffle;
