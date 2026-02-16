@@ -3,6 +3,9 @@ node_modules/
 .pnp
 .pnp.js
 
+# Old app directory (leftover node_modules)
+app/
+
 # Build output
 dist/
 build/
