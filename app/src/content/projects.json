@@ -1,0 +1,180 @@
+{
+  "projects": [
+    {
+      "id": "vitala-data-platform",
+      "slug": "vitala-data-platform",
+      "title": "VITALA Data Management Platform",
+      "year": 2024,
+      "summary": "Designed and implemented a complete Data Management Plan including governance, cybersecurity, ETL workflows, and traceability for a biomedical research organization.",
+      "problem": "Biomedical research data was fragmented across multiple systems with no standardized governance, leading to reproducibility issues and compliance risks. Experimental pipelines were manual and error-prone.",
+      "approach": "Led the design and implementation of a comprehensive Data Management Plan. Established data governance frameworks, cybersecurity protocols, and automated ETL processes. Created standardized workflows for NMR and MRI datasets with full traceability.",
+      "impact": "Improved data reliability and reproducibility across all research projects. Established compliance-ready governance framework. Reduced data retrieval time by 60% through optimized ETL pipelines.",
+      "tools": ["Python", "SQL", "Apache Airflow", "Docker", "AWS", "Git"],
+      "tags": ["Data Engineering", "Healthcare", "ETL", "Governance", "Compliance"],
+      "role": "Data Manager & UX Designer",
+      "featured": true,
+      "impactLevel": "high",
+      "technicalLevel": "high",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "nmr-mri-pipeline",
+      "slug": "nmr-mri-pipeline",
+      "title": "NMR/MRI Analysis Pipeline Automation",
+      "year": 2024,
+      "summary": "Automated analysis pipelines for NMR and MRI experimental datasets, ensuring reproducibility and standardized output reporting while improving processing speed by 4x.",
+      "problem": "Manual analysis of NMR and MRI datasets was time-consuming (4-6 hours per experiment), error-prone, and lacked standardization. Results were difficult to reproduce across different operators.",
+      "approach": "Built automated pipelines using Python and containerized workflows. Implemented standardized preprocessing, analysis, and reporting modules. Created a user-friendly interface for non-technical researchers to run analyses.",
+      "impact": "Reduced analysis time from 4-6 hours to under 1 hour (4x improvement). Achieved 99.5% reproducibility across experiments. Enabled researchers to focus on interpretation rather than manual processing.",
+      "tools": ["Python", "NumPy", "SciPy", "Docker", "Jupyter", "React"],
+      "tags": ["Automation", "Medical Imaging", "Python", "Healthcare", "Data Pipeline"],
+      "role": "Data Engineer & UX Designer",
+      "featured": true,
+      "impactLevel": "high",
+      "technicalLevel": "high",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "biomarker-ml",
+      "slug": "biomarker-ml",
+      "title": "ML for Carcinogenic Biomarker Detection",
+      "year": 2023,
+      "summary": "Developed machine learning algorithms to identify carcinogenic biomarkers and predict drug toxicity, contributing to faster and more accurate safety assessments.",
+      "problem": "Traditional biomarker identification and toxicity prediction relied on manual analysis and simple statistical methods, missing complex patterns and taking weeks to produce results.",
+      "approach": "Developed ensemble ML models combining random forests, gradient boosting, and neural networks. Implemented feature engineering pipelines for molecular descriptors. Created validation frameworks with cross-validation and external test sets.",
+      "impact": "Achieved 87% accuracy in biomarker identification and 82% accuracy in toxicity prediction. Reduced analysis time from weeks to days. Contributed to 3 peer-reviewed publications.",
+      "tools": ["Python", "scikit-learn", "XGBoost", "TensorFlow", "Pandas", "RDKit"],
+      "tags": ["Machine Learning", "Healthcare", "Biomarkers", "Python", "Research"],
+      "role": "AI Developer & Researcher",
+      "featured": true,
+      "impactLevel": "high",
+      "technicalLevel": "high",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "pain-detection-ai",
+      "slug": "pain-detection-ai",
+      "title": "AI Pain Detection in Rodent Models",
+      "year": 2023,
+      "summary": "Built an end-to-end data pipeline for brain imaging datasets and developed a classification model for pain detection in rats achieving 90%+ accuracy.",
+      "problem": "Pain assessment in preclinical research relied on subjective behavioral observations. Objective, scalable methods were needed to improve drug efficacy studies and reduce animal variability.",
+      "approach": "Built data pipelines for preprocessing fMRI and behavioral data. Developed deep learning classification models using CNN architectures. Implemented rigorous validation with held-out test sets and cross-lab validation.",
+      "impact": "Achieved 92% accuracy in pain state classification. Enabled objective pain assessment at scale. Pipeline processed 10x more subjects than manual methods. Results contributed to 2 publications.",
+      "tools": ["Python", "TensorFlow", "Keras", "nilearn", "NumPy", "Pandas"],
+      "tags": ["Deep Learning", "Medical Imaging", "Healthcare", "Python", "Research"],
+      "role": "AI Developer & Researcher",
+      "featured": true,
+      "impactLevel": "high",
+      "technicalLevel": "high",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "electronic-nose",
+      "slug": "electronic-nose",
+      "title": "Electronic Nose for Health & Food Applications",
+      "year": 2023,
+      "summary": "Designed computational models for an electronic nose prototype, developing predictive models for wine differentiation with 95%+ accuracy and health monitoring applications.",
+      "problem": "Traditional chemical analysis for food quality and health monitoring was expensive, time-consuming, and required specialized equipment. A low-cost, rapid alternative was needed.",
+      "approach": "Designed signal processing pipelines for sensor arrays. Developed classification and regression models for odor identification and concentration prediction. Created real-time inference system for prototype demonstration.",
+      "impact": "Achieved 95%+ accuracy in wine differentiation tasks. Demonstrated feasibility for health monitoring use cases. Reduced analysis cost by 80% compared to traditional methods.",
+      "tools": ["Python", "scikit-learn", "Signal Processing", "Pandas", "NumPy", "Matplotlib"],
+      "tags": ["Machine Learning", "Signal Processing", "IoT", "Python", "Research"],
+      "role": "Computational Researcher",
+      "featured": false,
+      "impactLevel": "medium",
+      "technicalLevel": "medium",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "throughput-optimization",
+      "slug": "throughput-optimization",
+      "title": "Experimental Throughput Optimization",
+      "year": 2024,
+      "summary": "Led a process redesign initiative that increased experimental throughput by 8x, enabling faster iteration cycles and accelerated model validation.",
+      "problem": "Experimental bottlenecks limited the pace of research. Manual sample handling, sequential processing, and resource conflicts created delays in critical path experiments.",
+      "approach": "Conducted process mapping and bottleneck analysis. Redesigned workflows with parallel processing and automated scheduling. Implemented sample tracking system and resource optimization algorithms.",
+      "impact": "Increased throughput from 12 to 96 experiments per week (8x improvement). Reduced experiment wait time by 70%. Enabled faster iteration on ML model validation.",
+      "tools": ["Python", "Process Mapping", "Project Management", "Data Analysis"],
+      "tags": ["Process Optimization", "Operations", "Data Analysis", "Project Management"],
+      "role": "Data Manager & Project Lead",
+      "featured": false,
+      "impactLevel": "high",
+      "technicalLevel": "medium",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "internal-analysis-software",
+      "slug": "internal-analysis-software",
+      "title": "Internal Data Analysis Software Product",
+      "year": 2024,
+      "summary": "Built and launched an internal data analysis software product with UX research and interface design, delivering results 4x faster and improving adoption across technical teams.",
+      "problem": "Researchers struggled with complex command-line tools for data analysis. High learning curve led to errors and underutilization of available capabilities.",
+      "approach": "Conducted user research with 15+ researchers. Designed and built web-based interface with guided workflows and visualizations. Iterated based on usability testing feedback.",
+      "impact": "Delivered results 4x faster than previous workflow. Achieved 85% team adoption within 3 months. Reduced training time from 2 weeks to 2 days.",
+      "tools": ["React", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Figma"],
+      "tags": ["Product Design", "UX Research", "Full Stack", "Healthcare", "Data Visualization"],
+      "role": "UX Designer & Frontend Developer",
+      "featured": true,
+      "impactLevel": "high",
+      "technicalLevel": "medium",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    },
+    {
+      "id": "consulting-analytics",
+      "slug": "consulting-analytics",
+      "title": "Enterprise Analytics & BI Transformation",
+      "year": 2025,
+      "summary": "Delivering data-driven strategy and BI transformation projects for multinational clients including Bimbo, Danone, and Suntory.",
+      "problem": "Enterprise clients needed to modernize their analytics capabilities, improve data governance, and build automated reporting systems to support decision-making at scale.",
+      "approach": "Led data strategy assessments and roadmap development. Designed and implemented data governance frameworks. Built automated analytics pipelines and self-service BI solutions.",
+      "impact": "Improved reporting efficiency by 60% for client organizations. Established data governance frameworks ensuring compliance. Enabled self-service analytics for 200+ business users.",
+      "tools": ["SQL", "Python", "Power BI", "Tableau", "Azure", "Databricks"],
+      "tags": ["Business Intelligence", "Consulting", "Data Strategy", "Enterprise", "Analytics"],
+      "role": "Senior Consultant",
+      "featured": false,
+      "impactLevel": "high",
+      "technicalLevel": "medium",
+      "links": {
+        "github": null,
+        "demo": null,
+        "caseStudy": null
+      },
+      "images": []
+    }
+  ]
+}
