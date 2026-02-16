@@ -1,15 +1,18 @@
 interface SectionHeaderProps {
-    label: string;
-    number: string;
-    subtitle: string;
+    id: string;
+    title: string;
 }
 
-export function SectionHeader({ label, number, subtitle }: SectionHeaderProps) {
+export function SectionHeader({ id, title }: SectionHeaderProps) {
     return (
-        <div className="grid grid-cols-3 items-center border-y border-border py-3 mb-12 lg:mb-16">
-            <span className="section-label text-left">© {label}</span>
-            <span className="section-label text-center">({number})</span>
-            <span className="section-label text-right">{subtitle}</span>
+        <div className="mb-20 pt-10 border-t border-border">
+            <div className="flex items-center gap-3 mb-4 font-mono text-[10px] uppercase tracking-[0.4em] opacity-40">
+                <span className="text-secondary">[{id}]</span>
+                <span>Section // Protocol</span>
+            </div>
+            <h2 className="text-display font-light tracking-tighter italic font-serif">
+                {title}<span className="text-primary not-italic">.</span>
+            </h2>
         </div>
     );
 }

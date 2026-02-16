@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +6,12 @@
 
 @layer base {
   :root {
-    /* Palmer Light Theme */
-    --background: 0 0% 96%;
-    /* #F4F4F4 */
+    /* Clinical Light Theme (Default) */
+    --background: 210 20% 98%;
+    /* #F8F9FA — cool white */
     --foreground: 260 21% 6%;
     /* #0D0B10 */
     --card: 0 0% 100%;
-    /* #FFFFFF */
     --card-foreground: 260 21% 6%;
     --popover: 0 0% 100%;
     --popover-foreground: 260 21% 6%;
@@ -20,20 +19,19 @@
     /* #B58CC8 plum */
     --primary-foreground: 0 0% 100%;
     --secondary: 3 100% 75%;
-    /* #FF857E coral */
+    /* #FF857E coral/red */
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 90%;
+    --muted: 210 15% 94%;
     --muted-foreground: 0 0% 40%;
-    /* #666 */
     --accent: 43 83% 67%;
-    /* #F0C965 gold */
+    /* #F0C965 gold/yellow */
     --accent-foreground: 260 21% 6%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
+    --border: 0 0% 0% / 0.06;
+    --input: 0 0% 0% / 0.06;
     --ring: 278 35% 66%;
-    --radius: 0.5rem;
+    --radius: 0.125rem;
 
     --bio-plum: 278 35% 66%;
     --soft-coral: 3 100% 75%;
@@ -41,33 +39,27 @@
   }
 
   .dark {
-    /* Palmer Dark Theme (default) */
+    /* Clinical Dark Theme */
     --background: 260 21% 4%;
     /* #0D0B10 */
-    --foreground: 0 0% 96%;
-    /* #F4F4F4 */
+    --foreground: 210 20% 98%;
+    /* #F8F9FA */
     --card: 262 17% 8%;
-    /* #141118 */
-    --card-foreground: 0 0% 96%;
+    --card-foreground: 210 20% 98%;
     --popover: 262 17% 8%;
-    --popover-foreground: 0 0% 96%;
+    --popover-foreground: 210 20% 98%;
     --primary: 278 35% 66%;
-    /* #B58CC8 plum */
     --primary-foreground: 0 0% 100%;
     --secondary: 3 100% 75%;
-    /* #FF857E coral */
     --secondary-foreground: 0 0% 100%;
     --muted: 262 12% 12%;
     --muted-foreground: 0 0% 60%;
-    /* #999 */
     --accent: 43 83% 67%;
-    /* #F0C965 gold */
     --accent-foreground: 260 21% 4%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 13%;
-    /* #222 */
-    --input: 0 0% 13%;
+    --border: 0 0% 100% / 0.06;
+    --input: 0 0% 100% / 0.06;
     --ring: 278 35% 66%;
 
     --bio-plum: 278 35% 66%;
@@ -97,31 +89,95 @@
   h5,
   h6 {
     font-family: 'Inter', system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+  }
+
+  ::selection {
+    background: #B58CC8;
+    color: white;
   }
 }
 
 @layer utilities {
-
-  /* Font utilities */
   .font-display {
     font-family: 'Inter', system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.03em;
   }
 
   .font-body {
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Palmer section label — small muted annotation text */
-  .section-label {
-    @apply text-xs font-medium uppercase tracking-widest text-muted-foreground;
-    letter-spacing: 0.15em;
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Text gradient — brand plum → coral */
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Clinical label — tiny mono uppercase */
+  .clinical-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    opacity: 0.4;
+  }
+
+  /* Clinical section ref — red bracketed ID */
+  .clinical-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: #FF857E;
+  }
+
+  /* Dot grid background */
+  .dot-grid::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+    background-image: radial-gradient(currentColor 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  /* Precision vertical lines */
+  .precision-line-left {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 5vw;
+    width: 1px;
+    background: currentColor;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .precision-line-right {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 5vw;
+    width: 1px;
+    background: currentColor;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Focus visible */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Text gradient */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
@@ -131,81 +187,6 @@
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
     background-size: 200% auto;
-  }
-
-  /* Glass effect */
-  .glass {
-    @apply bg-background/80 backdrop-blur-xl;
-  }
-
-  /* Rolling text hover — Palmer signature */
-  .rolling-text {
-    display: inline-flex;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .rolling-text span {
-    display: block;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .rolling-text:hover span {
-    transform: translateY(-100%);
-  }
-
-  .rolling-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .rolling-text:hover::after {
-    transform: translateY(-100%);
-  }
-
-  /* Marquee animation for tickers */
-  .marquee {
-    display: flex;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .marquee-inner {
-    display: flex;
-    animation: marquee 30s linear infinite;
-  }
-
-  /* Link underline animation */
-  .link-underline {
-    @apply relative;
-  }
-
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-300;
-  }
-
-  .link-underline:hover::after {
-    @apply w-full;
-  }
-
-  /* Grain texture overlay */
-  .grain::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.015;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Focus visible */
-  .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
   /* Reduced motion */
@@ -235,70 +216,12 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
   }
 }
 
@@ -314,24 +237,10 @@
   }
 }
 
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -339,16 +248,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.2);
-  border-radius: 3px;
+  background: hsl(var(--muted-foreground) / 0.15);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.4);
-}
-
-/* Selection */
-::selection {
-  background: hsl(var(--primary) / 0.25);
-  color: hsl(var(--foreground));
+  background: hsl(var(--muted-foreground) / 0.3);
 }

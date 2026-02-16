@@ -5,6 +5,8 @@ import { SectionHeader } from '@/components/ui-custom/SectionHeader';
 import { getAllProjects, getAllTags, filterProjects, sortProjects } from '@/lib/projects';
 import type { SortOption } from '@/types/project';
 
+const ACCENT_COLORS = ['#B58CC8', '#FF857E', '#F0C965'];
+
 export function Projects() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -25,110 +27,96 @@ export function Projects() {
   };
 
   return (
-    <div className="pt-24 pb-20 lg:pt-32 lg:pb-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <SectionHeader label="All Projects" number="MBR® — Work" subtitle="Portfolio Archive" />
+    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10">
+      <SectionHeader id="A1" title="All Clinical Trials" />
 
-        {/* Page title */}
-        <h1 className="text-hero text-foreground mb-6">Work.</h1>
-        <p className="text-muted-foreground max-w-xl mb-12 leading-relaxed">
-          A collection of work spanning AI/ML, data engineering, healthcare,
-          and product design. Each project represents a unique challenge and measurable impact.
-        </p>
-
-        {/* Search + filters */}
-        <div className="flex flex-col lg:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-card border border-border rounded-full text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-            />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2">
-                <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-              </button>
-            )}
-          </div>
-
-          {/* Sort */}
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="px-4 py-3 bg-card border border-border rounded-full text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
-          >
-            <option value="newest">Newest First</option>
-            <option value="impact">Highest Impact</option>
-            <option value="technical">Most Technical</option>
-          </select>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-12">
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedTags.includes(tag)
-                  ? 'bg-primary text-primary-foreground'
-                  : 'border border-border text-muted-foreground hover:text-foreground hover:border-primary/50'
-                }`}
-            >
-              {tag}
+      {/* Search + Sort */}
+      <div className="flex flex-col lg:flex-row gap-4 mb-8">
+        <div className="relative flex-1">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 opacity-30" />
+          <input
+            type="text"
+            placeholder="Search trials..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-11 pr-4 py-4 bg-transparent border-b border-border font-mono text-xs uppercase tracking-wider placeholder:opacity-30 focus:outline-none focus:border-primary transition-colors"
+          />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100">
+              <X className="h-4 w-4" />
             </button>
+          )}
+        </div>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as SortOption)}
+          className="px-4 py-4 bg-transparent border-b border-border font-mono text-xs uppercase tracking-wider focus:outline-none focus:border-primary transition-colors"
+        >
+          <option value="newest">Newest First</option>
+          <option value="impact">Highest Impact</option>
+          <option value="technical">Most Technical</option>
+        </select>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mb-16">
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            onClick={() => toggleTag(tag)}
+            className={`font-mono text-[9px] px-3 py-1.5 rounded-sm uppercase tracking-wider transition-all ${selectedTags.includes(tag)
+                ? 'bg-foreground text-background'
+                : 'bg-foreground/5 opacity-40 hover:opacity-100'
+              }`}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      {/* Results */}
+      <div className="font-mono text-[10px] uppercase tracking-widest opacity-30 mb-8">
+        {filteredProjects.length} of {allProjects.length} trials
+      </div>
+
+      {/* Project rows */}
+      {filteredProjects.length > 0 ? (
+        <div className="grid grid-cols-1 gap-0">
+          {filteredProjects.map((project, i) => (
+            <Link
+              key={project.id}
+              to={`/projects/${project.slug}`}
+              className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-12 border-b border-border items-center hover:bg-foreground/[0.01] transition-colors"
+            >
+              <div className="lg:col-span-1 font-mono text-xs opacity-20">
+                REF_{String(i + 1).padStart(2, '0')}
+              </div>
+              <div className="lg:col-span-6">
+                <h4 className="text-2xl md:text-4xl font-light tracking-tight mb-2 group-hover:pl-4 transition-all duration-500">
+                  {project.title}
+                </h4>
+                <p className="text-sm opacity-40 font-light leading-relaxed max-w-lg">{project.summary}</p>
+              </div>
+              <div className="lg:col-span-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] block mb-1 opacity-30">Role</span>
+                <p className="text-sm font-bold">{project.role}</p>
+              </div>
+              <div className="lg:col-span-2 flex justify-end">
+                <span className="text-xl font-serif italic" style={{ color: ACCENT_COLORS[i % 3] }}>
+                  {project.year}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
-
-        {/* Results count */}
-        <div className="mb-6 text-xs text-muted-foreground uppercase tracking-wider">
-          {filteredProjects.length} of {allProjects.length} projects
+      ) : (
+        <div className="text-center py-20 opacity-30 font-mono text-xs uppercase tracking-widest">
+          No trials match your protocol.
+          <button onClick={() => { setSearchQuery(''); setSelectedTags([]); }} className="block mx-auto mt-4 text-primary underline">
+            Reset filters
+          </button>
         </div>
-
-        {/* Projects list — Palmer stacked style */}
-        {filteredProjects.length > 0 ? (
-          <div className="space-y-0">
-            {filteredProjects.map((project, index) => (
-              <Link
-                key={project.id}
-                to={`/projects/${project.slug}`}
-                className="group block"
-              >
-                <div className="flex items-center gap-6 py-6 border-b border-border hover:border-primary/50 transition-colors">
-                  <span className="text-xs text-muted-foreground font-medium w-8">
-                    ({String(index + 1).padStart(2, '0')})
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1 truncate">
-                      {project.summary}
-                    </p>
-                  </div>
-                  <span className="hidden md:block text-xs text-muted-foreground">{project.year}</span>
-                  <span className="hidden md:block text-xs text-muted-foreground uppercase tracking-wider">
-                    {project.tags[0]}
-                  </span>
-                  <span className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20 text-muted-foreground">
-            No projects match your filters.
-            <button
-              onClick={() => { setSearchQuery(''); setSelectedTags([]); }}
-              className="block mx-auto mt-4 text-primary hover:underline text-sm"
-            >
-              Clear all filters
-            </button>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

@@ -1,69 +1,68 @@
+import { SectionHeader } from '@/components/ui-custom/SectionHeader';
 import { Link } from '@/lib/router';
-import { RollingText } from '@/components/ui-custom/RollingText';
 import projectsData from '@/content/projects.json';
 
+const ACCENT_COLORS = ['#B58CC8', '#FF857E', '#F0C965', '#B58CC8', '#FF857E'];
 const featured = projectsData.projects.filter((p) => p.featured).slice(0, 5);
 
 export function FeaturedProjects() {
   return (
-    <section className="py-20 lg:py-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        {/* Marquee header like Palmer */}
-        <div className="overflow-hidden border-b border-border pb-8 mb-12">
-          <div className="flex gap-8 whitespace-nowrap">
-            <h2 className="text-display text-foreground">Featured Works©</h2>
-            <span className="text-display text-muted-foreground/20">•</span>
-            <h2 className="text-display text-foreground">Featured Works©</h2>
-            <span className="text-display text-muted-foreground/20">•</span>
-            <h2 className="text-display text-foreground">Featured Works©</h2>
-          </div>
-        </div>
+    <section>
+      <SectionHeader id="01" title="Clinical Trials & Case Studies" />
 
-        {/* Description + CTA */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-16">
-          <p className="text-muted-foreground max-w-xl leading-relaxed">
-            Every project is a chance to blend data science and design, shaping bold analytical
-            ideas into impactful systems — built with intent, precision, and human-centered clarity.
-          </p>
-          <RollingText
-            text="See All Projects"
-            href="/projects"
-            className="text-sm font-semibold text-foreground tracking-wider border border-border rounded-full px-8 py-3 hover:border-primary transition-colors flex-shrink-0"
-          />
-        </div>
+      <div className="grid grid-cols-1 gap-12">
+        {featured.map((project, i) => (
+          <Link
+            key={project.id}
+            to={`/projects/${project.slug}`}
+            className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-16 border-b border-border items-center hover:bg-foreground/[0.01] transition-colors"
+          >
+            {/* Reference number */}
+            <div className="lg:col-span-1 font-mono text-xs opacity-20">
+              REF_{i + 1}
+            </div>
 
-        {/* Project cards — stacked vertically like Palmer */}
-        <div className="space-y-2">
-          {featured.map((project, index) => (
-            <Link
-              key={project.id}
-              to={`/projects/${project.slug}`}
-              className="group block"
-            >
-              <div className="flex items-center gap-6 py-6 border-b border-border hover:border-primary/50 transition-colors">
-                {/* Number */}
-                <span className="text-xs text-muted-foreground font-medium w-8">
-                  ({String(index + 1).padStart(2, '0')})
+            {/* Title + Description */}
+            <div className="lg:col-span-6">
+              <h4 className="text-3xl md:text-5xl font-light tracking-tight mb-4 group-hover:pl-4 transition-all duration-500">
+                {project.title}
+              </h4>
+              <p className="text-lg opacity-50 max-w-xl font-light leading-relaxed">
+                {project.summary}
+              </p>
+            </div>
+
+            {/* Organization / Tags */}
+            <div className="lg:col-span-3">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] block mb-2 opacity-30">
+                Role
+              </span>
+              <p className="text-sm font-bold">{project.role}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tools.slice(0, 3).map((t) => (
+                  <span key={t} className="font-mono text-[9px] px-2 py-1 bg-foreground/5 rounded-sm">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Key Metric */}
+            <div className="lg:col-span-2 flex justify-end">
+              <div className="text-right">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] block mb-1 opacity-30">
+                  Key Metric
                 </span>
-
-                {/* Title — grows on hover */}
-                <h3 className="text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary transition-colors flex-1">
-                  {project.title}
-                </h3>
-
-                {/* Category tag */}
-                <span className="hidden md:block text-xs text-muted-foreground uppercase tracking-wider">
+                <span
+                  className="text-2xl font-serif italic"
+                  style={{ color: ACCENT_COLORS[i % ACCENT_COLORS.length] }}
+                >
                   {project.tags[0]}
                 </span>
-
-                {/* Arrow or indicator */}
-                <span className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">
-                  →
-                </span>
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

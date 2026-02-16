@@ -1,107 +1,111 @@
 import { useState } from 'react';
 import { SectionHeader } from '@/components/ui-custom/SectionHeader';
-import { RollingText } from '@/components/ui-custom/RollingText';
-import { Linkedin, Github, Mail } from 'lucide-react';
+import { Linkedin, Github, Mail, ArrowRight } from 'lucide-react';
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    window.location.href = `mailto:hello@marina.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
-  };
-
   return (
-    <div className="pt-24 pb-20 lg:pt-32 lg:pb-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <SectionHeader label="Contact" number="MBR® — Connect" subtitle="Let's Talk" />
+    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10 space-y-32">
+      <SectionHeader id="C1" title="Initiate Contact" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left */}
-          <div>
-            <h1 className="text-hero text-foreground mb-8">Let's talk.</h1>
-            <p className="text-muted-foreground leading-relaxed mb-10 max-w-md">
-              Open to opportunities in data, AI, product, and health tech.
-              Whether it's a full-time role, freelance project, or collaboration —
-              let's discuss how I can help.
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+        {/* Left — Info */}
+        <div className="lg:col-span-5 space-y-16">
+          <p className="text-3xl md:text-4xl font-light leading-tight tracking-tight">
+            Open to opportunities in <span className="font-serif italic text-primary">data</span>,{' '}
+            <span className="font-serif italic text-secondary">AI</span>, and{' '}
+            <span className="font-serif italic text-accent">product</span>.
+          </p>
 
-            {/* Social links */}
-            <div className="space-y-4">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="text-sm">LinkedIn</span>
-                <span className="text-xs text-muted-foreground/50 group-hover:text-muted-foreground ml-auto">↗</span>
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
-              >
-                <Github className="h-4 w-4" />
-                <span className="text-sm">GitHub</span>
-                <span className="text-xs text-muted-foreground/50 group-hover:text-muted-foreground ml-auto">↗</span>
-              </a>
-              <a
-                href="mailto:hello@marina.com"
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
-              >
-                <Mail className="h-4 w-4" />
-                <span className="text-sm">hello@marina.com</span>
-              </a>
-            </div>
+          <div className="space-y-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-40 block">
+              Channels // Direct
+            </span>
+            <a
+              href="mailto:marinabatllo7@gmail.com"
+              className="flex items-center gap-4 group py-3 border-b border-border hover:border-primary transition-colors"
+            >
+              <Mail size={16} strokeWidth={1} className="opacity-40" />
+              <span className="text-sm">marinabatllo7@gmail.com</span>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 group py-3 border-b border-border hover:border-primary transition-colors"
+            >
+              <Linkedin size={16} strokeWidth={1} className="opacity-40" />
+              <span className="text-sm">LinkedIn</span>
+              <span className="ml-auto font-mono text-[9px] opacity-20 group-hover:opacity-60">↗</span>
+            </a>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 group py-3 border-b border-border hover:border-primary transition-colors"
+            >
+              <Github size={16} strokeWidth={1} className="opacity-40" />
+              <span className="text-sm">GitHub</span>
+              <span className="ml-auto font-mono text-[9px] opacity-20 group-hover:opacity-60">↗</span>
+            </a>
           </div>
+        </div>
 
-          {/* Right — Contact form */}
-          <div className="flex flex-col justify-end">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="section-label block mb-2">Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors text-sm"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div>
-                <label className="section-label block mb-2">Email</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors text-sm"
-                  placeholder="your@email.com"
-                  required
-                />
-              </div>
-              <div>
-                <label className="section-label block mb-2">Message</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors text-sm resize-none"
-                  placeholder="Tell me about your project..."
-                  required
-                />
-              </div>
-              <RollingText
-                text="Send Message"
-                onClick={() => handleSubmit(new Event('submit') as any)}
-                className="text-sm font-semibold text-foreground tracking-wider border border-border rounded-full px-8 py-3 hover:border-primary transition-colors"
+        {/* Right — Form */}
+        <div className="lg:col-span-7">
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-40 block mb-12">
+            Transmission // Form
+          </span>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              window.location.href = `mailto:marinabatllo7@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
+            }}
+            className="space-y-8"
+          >
+            <div>
+              <label className="font-mono text-[9px] uppercase tracking-widest opacity-30 block mb-3">Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-0 py-4 bg-transparent border-b border-border text-lg font-light tracking-tight placeholder:opacity-20 focus:outline-none focus:border-primary transition-colors"
+                placeholder="Your name"
+                required
               />
-            </form>
-          </div>
+            </div>
+            <div>
+              <label className="font-mono text-[9px] uppercase tracking-widest opacity-30 block mb-3">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-0 py-4 bg-transparent border-b border-border text-lg font-light tracking-tight placeholder:opacity-20 focus:outline-none focus:border-primary transition-colors"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div>
+              <label className="font-mono text-[9px] uppercase tracking-widest opacity-30 block mb-3">Message</label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows={4}
+                className="w-full px-0 py-4 bg-transparent border-b border-border text-lg font-light tracking-tight placeholder:opacity-20 focus:outline-none focus:border-primary transition-colors resize-none"
+                placeholder="Describe your project..."
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="group relative px-10 py-5 rounded-sm border border-foreground overflow-hidden transition-all hover:bg-foreground hover:text-background"
+            >
+              <span className="relative z-10 font-mono text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-3">
+                Transmit <ArrowRight size={16} />
+              </span>
+            </button>
+          </form>
         </div>
       </div>
     </div>

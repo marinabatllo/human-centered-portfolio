@@ -1,75 +1,52 @@
-import { useEffect, useState } from 'react';
-import { BioHeatmap } from '@/components/ui-custom/BioHeatmap';
-import { RollingText } from '@/components/ui-custom/RollingText';
-import { SectionHeader } from '@/components/ui-custom/SectionHeader';
-
-const roles = ['ML Engineer', 'Data Scientist', 'HCI Researcher', 'Product Builder', 'Creative Technologist'];
+import { ArrowRight, Dna } from 'lucide-react';
+import { Link } from '@/lib/router';
 
 export function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [fadeIn, setFadeIn] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFadeIn(false);
-      setTimeout(() => {
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        setFadeIn(true);
-      }, 300);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Neural pulse background */}
-      <BioHeatmap />
-
-      {/* Overlay gradient for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background pointer-events-none z-[1]" />
-
-      {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-end max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-16 lg:pb-24">
-        {/* Section annotation */}
-        <SectionHeader label="Portfolio" number="MBR® — 01" subtitle="Applied AI" />
-
-        {/* Top metadata row */}
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-xs text-muted-foreground tracking-wider uppercase">Based in Barcelona</span>
-          <span className="text-xs text-muted-foreground tracking-wider uppercase">Applied AI Engineer + HCI Specialist</span>
+    <section className="min-h-[90vh] flex flex-col justify-center relative">
+      <div className="max-w-6xl relative z-10">
+        {/* Status badge + role label */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-12 animate-fade-in">
+          <div className="px-3 py-1 rounded-full border border-foreground/10 font-mono text-[9px] uppercase tracking-widest flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            System Active: Marina_Bio_01
+          </div>
+          <span className="font-mono text-[10px] opacity-30 uppercase tracking-[0.4em]">
+            Biomedical Data Architect
+          </span>
         </div>
 
         {/* Massive headline */}
-        <h1 className="text-hero text-foreground mb-8">
-          Data & AI for<br />
-          <span className="text-gradient-brand">Human Impact</span>
+        <h1 className="text-hero font-light leading-[0.8] tracking-tighter mb-16 animate-fade-in-up">
+          BIO<span className="text-primary">DATA</span>
+          <br />
+          STRATEGY<span className="font-serif italic text-secondary">.</span>
         </h1>
 
-        {/* Roles ticker */}
-        <div className="flex items-center gap-4 mb-10">
-          <div className="h-px flex-1 bg-border" />
-          <span
-            className={`text-sm text-muted-foreground font-medium tracking-wider uppercase transition-opacity duration-300 ${fadeIn ? 'opacity-100' : 'opacity-0'
-              }`}
-          >
-            {roles[roleIndex]}
-          </span>
-          <div className="h-px flex-1 bg-border" />
+        {/* Description + CTA */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-end animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+          <div className="md:col-span-8">
+            <p className="text-2xl md:text-4xl font-light leading-tight opacity-70 max-w-3xl">
+              Translating complex <span className="font-serif italic">biological phenomena</span> into scalable
+              <span className="font-serif italic"> digital intelligence</span>. Specialist in AI-driven biomarker discovery and FMCG transformation.
+            </p>
+          </div>
+          <div className="md:col-span-4 flex md:justify-end">
+            <Link
+              to="/projects"
+              className="group relative px-10 py-5 rounded-sm border border-foreground overflow-hidden transition-all hover:bg-foreground hover:text-background"
+            >
+              <span className="relative z-10 font-mono text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-3">
+                View Trials <ArrowRight size={16} />
+              </span>
+            </Link>
+          </div>
         </div>
+      </div>
 
-        {/* CTA buttons */}
-        <div className="flex items-center gap-6">
-          <RollingText
-            text="Contact"
-            href="/contact"
-            className="text-sm font-semibold text-foreground tracking-wider border border-border rounded-full px-8 py-3 hover:border-primary transition-colors"
-          />
-          <RollingText
-            text="See Projects"
-            href="/projects"
-            className="text-sm font-semibold text-muted-foreground tracking-wider hover:text-foreground transition-colors"
-          />
-        </div>
+      {/* Background DNA icon */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none">
+        <Dna size={600} strokeWidth={0.5} className="text-primary" />
       </div>
     </section>
   );

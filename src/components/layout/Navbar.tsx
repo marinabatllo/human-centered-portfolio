@@ -1,30 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouter } from '@/lib/router';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { RollingText } from '@/components/ui-custom/RollingText';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
-  { href: '/cv', label: 'CV' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'home' },
+  { href: '/projects', label: 'projects' },
+  { href: '/about', label: 'about' },
+  { href: '/cv', label: 'cv' },
+  { href: '/contact', label: 'contact' },
 ];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { currentPath } = useRouter();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -36,81 +26,77 @@ export function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-background/90 backdrop-blur-xl border-b border-border'
-          : 'bg-transparent'
-        }`}
-    >
-      <nav className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="text-foreground font-display text-lg tracking-tight hover:opacity-70 transition-opacity"
-          >
-            Marina<span className="text-primary">®</span>
-          </Link>
-
-          {/* Desktop Navigation — Rolling text links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <RollingText
-                key={link.href}
-                text={link.label}
-                href={link.href}
-                uppercase={false}
-                className={`text-sm font-medium tracking-wide ${isActive(link.href)
-                    ? 'text-foreground'
-                    : 'text-muted-foreground'
-                  }`}
-              />
-            ))}
+    <header className="fixed top-0 left-0 right-0 z-50 h-24 flex items-center bg-transparent backdrop-blur-sm border-b border-border">
+      <nav className="max-w-7xl mx-auto px-8 w-full flex justify-between items-center">
+        {/* Logo: Monogram circle + mono name */}
+        <Link to="/" className="group flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full border border-foreground flex items-center justify-center font-bold text-xs group-hover:bg-foreground group-hover:text-background transition-all duration-300">
+            M
           </div>
+          <span className="hidden sm:block font-mono text-[10px] font-bold uppercase tracking-[0.4em]">
+            Marina Batlló Rius
+          </span>
+        </Link>
 
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+        {/* Desktop Navigation — Clinical style */}
+        <div className="hidden md:flex items-center gap-12 font-mono text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`transition-all hover:opacity-100 ${isActive(link.href)
+                  ? 'opacity-100 font-serif italic text-sm lowercase tracking-normal text-primary'
+                  : ''
+                }`}
             >
-              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            </button>
-
-            {/* Mobile menu */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
+              {link.label}
+            </Link>
+          ))}
         </div>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 pb-6' : 'max-h-0'
-            }`}
-        >
-          <div className="flex flex-col gap-1 pt-2 border-t border-border">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`px-4 py-3 text-sm font-medium transition-colors ${isActive(link.href)
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                  }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+        {/* Right side */}
+        <div className="flex items-center gap-6">
+          <button
+            onClick={toggleTheme}
+            className="opacity-40 hover:opacity-100 transition-opacity"
+            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          <Link
+            to="/contact"
+            className="font-mono text-[10px] font-bold uppercase tracking-widest bg-foreground text-background px-6 py-2 rounded-sm hover:opacity-90 transition-opacity"
+          >
+            Contact
+          </Link>
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden font-mono text-[10px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100"
+          >
+            {isMobileMenuOpen ? 'Close' : 'Menu'}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden absolute top-24 left-0 right-0 bg-background border-b border-border overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 py-6' : 'max-h-0'
+          }`}
+      >
+        <div className="max-w-7xl mx-auto px-8 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`font-mono text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive(link.href) ? 'opacity-100 text-primary' : 'opacity-40 hover:opacity-100'
+                }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }

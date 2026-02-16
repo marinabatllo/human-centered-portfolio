@@ -1,5 +1,6 @@
 import { SectionHeader } from '@/components/ui-custom/SectionHeader';
-import { RollingText } from '@/components/ui-custom/RollingText';
+import { Microscope } from 'lucide-react';
+import { Link } from '@/lib/router';
 
 const experience = [
   {
@@ -24,78 +25,98 @@ const experience = [
 
 export function About() {
   return (
-    <div className="pt-24 pb-20 lg:pt-32 lg:pb-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <SectionHeader label="Personal Profile" number="MBR® — About" subtitle="Background" />
+    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10 space-y-48">
+      <SectionHeader id="02" title="The Researcher's Path" />
 
-        {/* Split layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
-          {/* Left — title + image placeholder */}
-          <div>
-            <h1 className="text-hero text-foreground mb-8">About.</h1>
-            <div className="aspect-[4/5] bg-card border border-border rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-32 h-32 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <span className="font-display text-4xl text-primary">MB</span>
-                </div>
-                <p className="text-sm text-muted-foreground">Marina Batlló Rius</p>
-              </div>
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+        <div className="lg:col-span-7">
+          <p className="text-3xl md:text-5xl font-light leading-tight tracking-tight mb-12">
+            Bridging the gap between{' '}
+            <span className="italic font-serif text-primary">scientific discovery</span> and{' '}
+            <span className="italic font-serif text-secondary">market application</span>.
+          </p>
+          <div className="space-y-8 text-xl font-light opacity-60 leading-relaxed max-w-2xl">
+            <p>
+              My background in Bioengineering and MSc in HCI allows me to view technical
+              problems through two lenses: the empirical rigor of the lab and the user-centric
+              requirements of a digital product.
+            </p>
+            <p>
+              I focus on &quot;Standardization&quot; as a service — creating the ETL pipelines
+              and governance frameworks that turn messy experimental data into clean, strategic
+              fuel for multinationals.
+            </p>
           </div>
-
-          {/* Right — bio */}
-          <div className="flex flex-col justify-end">
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Blending data science and human-centered design with functional clarity and
-              creative precision. Delivering thoughtful analytical systems with structure,
-              flow, and real-world impact.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              My background in bioengineering taught me to approach complex systems with rigor.
-              My MSc in Human-Computer Interaction taught me that technology only matters if
-              people can use it. And my work in consulting taught me that impact requires
-              understanding business context.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-10">
-              This unique combination — technical depth, design thinking, and business acumen —
-              is what I bring to every project. Whether accelerating drug discovery pipelines
-              or building AI products, I focus on outcomes that matter.
-            </p>
-
-            <div className="flex items-center gap-6">
-              <RollingText
-                text="See Projects"
-                href="/projects"
-                className="text-sm font-semibold text-foreground tracking-wider border border-border rounded-full px-8 py-3 hover:border-primary transition-colors"
-              />
-              <RollingText
-                text="Download CV"
-                href="/cv"
-                className="text-sm font-semibold text-muted-foreground tracking-wider hover:text-foreground transition-colors"
-              />
+        </div>
+        <div className="lg:col-span-5">
+          <div className="p-12 border border-border rounded-sm aspect-square flex flex-col justify-between">
+            <Microscope size={48} strokeWidth={1} className="text-primary" />
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-6 italic">
+                Academic Credentials
+              </h5>
+              <ul className="space-y-6">
+                <li className="flex justify-between items-end border-b border-border pb-2">
+                  <span className="text-sm font-bold">MSc HCI (Honours)</span>
+                  <span className="font-mono text-[10px] opacity-40">Utrecht</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-border pb-2">
+                  <span className="text-sm font-bold">Bioengineering</span>
+                  <span className="font-mono text-[10px] opacity-40">UIC Barcelona</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-border pb-2">
+                  <span className="text-sm font-bold">Art History</span>
+                  <span className="font-mono text-[10px] opacity-40">UOC</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Experience timeline */}
-        <SectionHeader label="Experience" number="MBR® — Career" subtitle="Professional Path" />
+      {/* Experience timeline */}
+      <div>
+        <div className="mb-20 pt-10 border-t border-border">
+          <div className="flex items-center gap-3 mb-4 font-mono text-[10px] uppercase tracking-[0.4em] opacity-40">
+            <span className="text-secondary">[EXP]</span>
+            <span>Career // Timeline</span>
+          </div>
+          <h2 className="text-display font-light tracking-tighter italic font-serif">
+            Experience<span className="text-primary not-italic">.</span>
+          </h2>
+        </div>
 
         <div className="space-y-0">
-          {experience.map((exp, index) => (
-            <div key={index} className="flex gap-8 py-8 border-b border-border group">
-              <span className="text-xs text-muted-foreground font-medium w-32 flex-shrink-0 pt-1">
-                {exp.period}
-              </span>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-1">
+          {experience.map((exp, i) => (
+            <div key={i} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-12 border-b border-border items-start hover:bg-foreground/[0.01] transition-colors">
+              <div className="lg:col-span-1 font-mono text-xs opacity-20">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <div className="lg:col-span-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] opacity-30">{exp.period}</span>
+              </div>
+              <div className="lg:col-span-5">
+                <h3 className="text-2xl font-light tracking-tight mb-2 group-hover:pl-2 transition-all duration-500">
                   {exp.role}
                 </h3>
-                <p className="text-sm text-primary mb-2">{exp.company}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{exp.description}</p>
+                <p className="text-sm opacity-50 font-light leading-relaxed">{exp.description}</p>
+              </div>
+              <div className="lg:col-span-3 text-right">
+                <span className="text-sm font-serif italic text-primary">{exp.company}</span>
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* CTA */}
+      <div className="pt-10 border-t border-border">
+        <Link
+          to="/projects"
+          className="group inline-flex items-center gap-4 px-10 py-5 rounded-sm border border-foreground overflow-hidden transition-all hover:bg-foreground hover:text-background"
+        >
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.3em]">View All Trials</span>
+        </Link>
       </div>
     </div>
   );

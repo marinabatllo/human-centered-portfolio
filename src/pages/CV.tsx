@@ -1,11 +1,12 @@
 import { SectionHeader } from '@/components/ui-custom/SectionHeader';
 
 const education = [
-  { period: '2022 – 2023', degree: 'MSc Human-Computer Interaction', school: 'University College London (UCL)' },
-  { period: '2017 – 2022', degree: 'BSc Biomedical Engineering', school: 'Universitat de Barcelona' },
+  { period: '2022 – 2023', degree: 'MSc Human-Computer Interaction', school: 'Utrecht University' },
+  { period: '2017 – 2022', degree: 'BSc Biomedical Engineering', school: 'UIC Barcelona' },
+  { period: '2020 – 2021', degree: 'Art History', school: 'UOC' },
 ];
 
-const skills = {
+const skills: Record<string, string[]> = {
   'Languages & ML': ['Python', 'TensorFlow', 'PyTorch', 'scikit-learn', 'XGBoost', 'SQL', 'R'],
   'Data & Cloud': ['Pandas', 'NumPy', 'Apache Airflow', 'Docker', 'AWS', 'Azure', 'Databricks'],
   'Frontend & Design': ['React', 'TypeScript', 'Figma', 'Tailwind CSS', 'HTML/CSS'],
@@ -20,63 +21,77 @@ const certifications = [
 
 export function CV() {
   return (
-    <div className="pt-24 pb-20 lg:pt-32 lg:pb-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <SectionHeader label="Curriculum Vitae" number="MBR® — CV" subtitle="Qualifications" />
+    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10 space-y-32">
+      <SectionHeader id="CV" title="Curriculum Vitae" />
 
-        <h1 className="text-hero text-foreground mb-16">CV.</h1>
-
-        {/* Education */}
-        <div className="mb-20">
-          <h2 className="section-label mb-8">Education</h2>
-          <div className="space-y-0">
-            {education.map((edu, i) => (
-              <div key={i} className="flex gap-8 py-6 border-b border-border">
-                <span className="text-xs text-muted-foreground font-medium w-32 flex-shrink-0 pt-1">
-                  {edu.period}
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-foreground mb-1">{edu.degree}</h3>
-                  <p className="text-sm text-primary">{edu.school}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Education */}
+      <div>
+        <div className="flex items-center gap-3 mb-12 font-mono text-[10px] uppercase tracking-[0.4em] opacity-40">
+          <span className="text-secondary">[EDU]</span>
+          <span>Academic // Protocol</span>
         </div>
-
-        {/* Skills */}
-        <div className="mb-20">
-          <h2 className="section-label mb-8">Technical Skills</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category}>
-                <h3 className="text-sm font-bold text-foreground mb-4">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1.5 border border-border rounded-full text-xs text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+        <div className="space-y-0">
+          {education.map((edu, i) => (
+            <div key={i} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-8 border-b border-border items-center hover:bg-foreground/[0.01] transition-colors">
+              <div className="lg:col-span-1 font-mono text-xs opacity-20">
+                {String(i + 1).padStart(2, '0')}
               </div>
-            ))}
-          </div>
+              <div className="lg:col-span-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] opacity-30">{edu.period}</span>
+              </div>
+              <div className="lg:col-span-5">
+                <h3 className="text-xl font-light tracking-tight group-hover:pl-2 transition-all duration-500">
+                  {edu.degree}
+                </h3>
+              </div>
+              <div className="lg:col-span-3 text-right">
+                <span className="text-sm font-serif italic text-primary">{edu.school}</span>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Certifications */}
-        <div>
-          <h2 className="section-label mb-8">Certifications</h2>
-          <div className="space-y-0">
-            {certifications.map((cert, i) => (
-              <div key={i} className="flex items-center gap-4 py-4 border-b border-border">
-                <span className="text-xs text-primary font-bold">{String(i + 1).padStart(2, '0')}</span>
-                <span className="text-sm text-foreground">{cert}</span>
+      {/* Skills */}
+      <div>
+        <div className="flex items-center gap-3 mb-12 font-mono text-[10px] uppercase tracking-[0.4em] opacity-40">
+          <span className="text-secondary">[TECH]</span>
+          <span>Technical // Stack</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          {Object.entries(skills).map(([category, items]) => (
+            <div key={category}>
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] opacity-30 block mb-6">{category}</span>
+              <div className="flex flex-wrap gap-2">
+                {items.map((skill) => (
+                  <span
+                    key={skill}
+                    className="font-mono text-[9px] px-3 py-1.5 bg-foreground/5 rounded-sm uppercase tracking-wider hover:bg-primary hover:text-white transition-colors cursor-default"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Certifications */}
+      <div>
+        <div className="flex items-center gap-3 mb-12 font-mono text-[10px] uppercase tracking-[0.4em] opacity-40">
+          <span className="text-secondary">[CERT]</span>
+          <span>Verified // Credentials</span>
+        </div>
+        <div className="space-y-0">
+          {certifications.map((cert, i) => (
+            <div key={i} className="flex items-center gap-8 py-6 border-b border-border hover:bg-foreground/[0.01] transition-colors">
+              <span className="font-mono text-xs text-primary opacity-60">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span className="text-lg font-light tracking-tight">{cert}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
