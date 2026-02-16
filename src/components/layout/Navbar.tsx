@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useRouter } from '@/lib/router';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Button } from '@/components/ui/button';
+import { RollingText } from '@/components/ui-custom/RollingText';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -22,112 +22,88 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [currentPath]);
 
   const isActive = (href: string) => {
-    if (href === '/') {
-      return currentPath === '/';
-    }
+    if (href === '/') return currentPath === '/';
     return currentPath.startsWith(href);
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-xl border-b border-border/50'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+          ? 'bg-background/90 backdrop-blur-xl border-b border-border'
           : 'bg-transparent'
-      }`}
+        }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="font-display text-lg lg:text-xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
+          <Link
+            to="/"
+            className="text-foreground font-display text-lg tracking-tight hover:opacity-70 transition-opacity"
           >
-            <span className="text-foreground">Marina</span>
-            <span className="text-primary">.</span>
+            Marina<span className="text-primary">®</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop Navigation — Rolling text links */}
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <RollingText
                 key={link.href}
-                to={link.href}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                  isActive(link.href)
+                text={link.label}
+                href={link.href}
+                uppercase={false}
+                className={`text-sm font-medium tracking-wide ${isActive(link.href)
                     ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                {link.label}
-                {isActive(link.href) && (
-                  <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary rounded-full" />
-                )}
-              </Link>
+                    : 'text-muted-foreground'
+                  }`}
+              />
             ))}
           </div>
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
+          {/* Right side */}
+          <div className="flex items-center gap-3">
             {/* Theme toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               onClick={toggleTheme}
-              className="rounded-full w-9 h-9"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
               aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
             >
-              {theme === 'light' ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-            </Button>
+              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+            </button>
 
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
+            {/* Mobile menu */}
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden rounded-full w-9 h-9"
+              className="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? 'max-h-80 pb-4' : 'max-h-0'
-          }`}
+          className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 pb-6' : 'max-h-0'
+            }`}
         >
-          <div className="flex flex-col gap-1 pt-2">
+          <div className="flex flex-col gap-1 pt-2 border-t border-border">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                  isActive(link.href)
-                    ? 'bg-primary/10 text-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
+                className={`px-4 py-3 text-sm font-medium transition-colors ${isActive(link.href)
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                  }`}
               >
                 {link.label}
               </Link>

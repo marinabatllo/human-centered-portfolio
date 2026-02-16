@@ -1,190 +1,101 @@
-import { MapPin, GraduationCap, Briefcase, Heart, Target, Sparkles } from 'lucide-react';
-import { AnimatedSection } from '@/components/ui-custom/AnimatedSection';
+import { SectionHeader } from '@/components/ui-custom/SectionHeader';
+import { RollingText } from '@/components/ui-custom/RollingText';
 
-
-
-const workProcess = [
+const experience = [
   {
-    step: '01',
-    title: 'Discover',
-    description: 'Understand the problem space, user needs, and business constraints through research and stakeholder interviews.',
+    period: '2024 – Present',
+    role: 'Senior Consultant',
+    company: 'Axis Corporate (Accenture)',
+    description: 'Delivering data-driven strategy and BI transformation for clients including Bimbo, Danone, and Suntory.',
   },
   {
-    step: '02',
-    title: 'Model',
-    description: 'Design solutions, prototype approaches, and define success metrics before writing production code.',
+    period: '2023 – 2024',
+    role: 'Data Manager & UX Designer',
+    company: 'VITALA – Biomedical Research',
+    description: 'Led data management, ML model development, and internal software design for healthcare research.',
   },
   {
-    step: '03',
-    title: 'Validate',
-    description: 'Test assumptions with real users, iterate based on feedback, and ensure technical feasibility.',
-  },
-  {
-    step: '04',
-    title: 'Ship',
-    description: 'Build with quality, deploy with confidence, and measure impact against defined success criteria.',
+    period: '2022 – 2023',
+    role: 'AI Developer & Researcher',
+    company: 'Universitat de Barcelona',
+    description: 'Developed ML models for biomarker detection and pain classification in preclinical research.',
   },
 ];
 
 export function About() {
   return (
-    <div className="py-12 lg:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <AnimatedSection className="mb-16">
-          <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium uppercase tracking-wider mb-4">
-            About Me
-          </span>
-          <h1 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-foreground mb-6">
-            The Story Behind the Work
-          </h1>
-        </AnimatedSection>
+    <div className="pt-24 pb-20 lg:pt-32 lg:pb-32">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <SectionHeader label="Personal Profile" number="MBR® — About" subtitle="Background" />
 
-        {/* Bio */}
-        <AnimatedSection delay={100} className="mb-16">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              I'm Marina Batlló Rius, an applied AI engineer with a background in bioengineering
-              and a Master's in Human-Computer Interaction. My journey has taken me from biomedical
-              research labs to consulting for Fortune 500 companies—and along the way, I've learned
-              that the best technology is both powerful and human-centered.
+        {/* Split layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
+          {/* Left — title + image placeholder */}
+          <div>
+            <h1 className="text-hero text-foreground mb-8">About.</h1>
+            <div className="aspect-[4/5] bg-card border border-border rounded-lg flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <span className="font-display text-4xl text-primary">MB</span>
+                </div>
+                <p className="text-sm text-muted-foreground">Marina Batlló Rius</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right — bio */}
+          <div className="flex flex-col justify-end">
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Blending data science and human-centered design with functional clarity and
+              creative precision. Delivering thoughtful analytical systems with structure,
+              flow, and real-world impact.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              My work sits at the intersection of three domains: rigorous data science, thoughtful
-              product design, and real business impact. Whether I'm building ML pipelines for
-              healthcare research or designing analytics tools for enterprise clients, I bring the
-              same approach: understand the problem deeply, design with users in mind, and measure
-              success by outcomes.
+              My background in bioengineering taught me to approach complex systems with rigor.
+              My MSc in Human-Computer Interaction taught me that technology only matters if
+              people can use it. And my work in consulting taught me that impact requires
+              understanding business context.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              What drives me is the potential for technology to solve meaningful problems—from
-              accelerating drug discovery to making complex data accessible to the people who need it.
-              I believe that the best solutions come from teams that combine technical excellence
-              with empathy for the humans who will use what we build.
+            <p className="text-muted-foreground leading-relaxed mb-10">
+              This unique combination — technical depth, design thinking, and business acumen —
+              is what I bring to every project. Whether accelerating drug discovery pipelines
+              or building AI products, I focus on outcomes that matter.
             </p>
-          </div>
-        </AnimatedSection>
 
-        {/* Quick info */}
-        <AnimatedSection delay={150} className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-4 p-6 bg-card rounded-2xl border border-border/50">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <div className="font-medium text-foreground mb-1">Location</div>
-                <div className="text-sm text-muted-foreground">Barcelona, Spain</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-6 bg-card rounded-2xl border border-border/50">
-              <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                <GraduationCap className="h-5 w-5 text-secondary" />
-              </div>
-              <div>
-                <div className="font-medium text-foreground mb-1">Education</div>
-                <div className="text-sm text-muted-foreground">MSc HCI, Utrecht University</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-6 bg-card rounded-2xl border border-border/50">
-              <div className="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center flex-shrink-0">
-                <Briefcase className="h-5 w-5 text-accent-foreground" />
-              </div>
-              <div>
-                <div className="font-medium text-foreground mb-1">Experience</div>
-                <div className="text-sm text-muted-foreground">4+ Years in Data & AI</div>
-              </div>
+            <div className="flex items-center gap-6">
+              <RollingText
+                text="See Projects"
+                href="/projects"
+                className="text-sm font-semibold text-foreground tracking-wider border border-border rounded-full px-8 py-3 hover:border-primary transition-colors"
+              />
+              <RollingText
+                text="Download CV"
+                href="/cv"
+                className="text-sm font-semibold text-muted-foreground tracking-wider hover:text-foreground transition-colors"
+              />
             </div>
           </div>
-        </AnimatedSection>
+        </div>
 
-        {/* Why these domains connect */}
-        <AnimatedSection delay={200} className="mb-16">
-          <h2 className="font-display text-2xl lg:text-3xl font-semibold text-foreground mb-6">
-            Why These Domains Connect
-          </h2>
-          <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-3xl p-8 lg:p-12">
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              <strong className="text-foreground">Bioengineering</strong> taught me to approach
-              complex biological systems with scientific rigor—to form hypotheses, design experiments,
-              and validate results with statistical confidence.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              <strong className="text-foreground">Human-Computer Interaction</strong> taught me
-              that technology is only successful if humans can use it effectively. User research,
-              usability testing, and iterative design are as important as technical implementation.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">Consulting</strong> taught me that impact requires
-              understanding business context—stakeholder management, ROI communication, and delivering
-              solutions that actually get adopted and drive value.
-            </p>
-          </div>
-        </AnimatedSection>
+        {/* Experience timeline */}
+        <SectionHeader label="Experience" number="MBR® — Career" subtitle="Professional Path" />
 
-        {/* Values */}
-        <AnimatedSection delay={250} className="mb-16">
-          <h2 className="font-display text-2xl lg:text-3xl font-semibold text-foreground mb-6">
-            How I Work
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {[
-              { icon: Heart, title: 'Human-First', desc: 'Technology should serve people, not the other way around.', bg: 'bg-primary/10', text: 'text-primary' },
-              { icon: Target, title: 'Impact-Driven', desc: 'Every line of code should create measurable positive outcomes.', bg: 'bg-secondary/10', text: 'text-secondary' },
-              { icon: Sparkles, title: 'Craft & Quality', desc: 'I take pride in clean code, thoughtful design, and attention to detail in everything I build.', bg: 'bg-accent/15', text: 'text-accent-foreground' },
-            ].map((value) => (
-              <div key={value.title} className="p-6 bg-card rounded-2xl border border-border/50 hover-lift">
-                <div className={`w-10 h-10 rounded-lg ${value.bg} flex items-center justify-center mb-4`}>
-                  <value.icon className={`h-5 w-5 ${value.text}`} />
-                </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{value.desc}</p>
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
-
-        {/* Process */}
-        <AnimatedSection delay={300} className="mb-16">
-          <h2 className="font-display text-2xl lg:text-3xl font-semibold text-foreground mb-6">
-            My Process
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {workProcess.map((step, index) => (
-              <div
-                key={step.step}
-                className="relative p-6 bg-card rounded-2xl border border-border/50"
-              >
-                <div className="font-mono text-3xl font-bold text-primary/30 mb-4">
-                  {step.step}
-                </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">
-                  {step.title}
+        <div className="space-y-0">
+          {experience.map((exp, index) => (
+            <div key={index} className="flex gap-8 py-8 border-b border-border group">
+              <span className="text-xs text-muted-foreground font-medium w-32 flex-shrink-0 pt-1">
+                {exp.period}
+              </span>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-1">
+                  {exp.role}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {step.description}
-                </p>
-                {index < workProcess.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-border" />
-                )}
+                <p className="text-sm text-primary mb-2">{exp.company}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{exp.description}</p>
               </div>
-            ))}
-          </div>
-        </AnimatedSection>
-
-        {/* Closing */}
-        <AnimatedSection delay={350} className="text-center py-12">
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            I'm always interested in connecting with people who share a passion for
-            building technology that makes a real difference.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
-          >
-            Let's start a conversation
-          </a>
-        </AnimatedSection>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

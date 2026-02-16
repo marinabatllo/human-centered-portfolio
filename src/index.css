@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,92 +6,73 @@
 
 @layer base {
   :root {
-    /* Bio-Impact Light Theme — Personal Brand */
-    --background: 50 30% 97%;
-    /* #FAFAF7 */
-    --foreground: 0 0% 9%;
-    /* #161616 */
+    /* Palmer Light Theme */
+    --background: 0 0% 96%;
+    /* #F4F4F4 */
+    --foreground: 260 21% 6%;
+    /* #0D0B10 */
     --card: 0 0% 100%;
     /* #FFFFFF */
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 260 21% 6%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 281 50% 24%;
-    /* #4B1E5A — deep bio plum */
-    --primary-foreground: 50 30% 97%;
-    --secondary: 3 83% 67%;
-    /* #F06C64 — soft coral */
+    --popover-foreground: 260 21% 6%;
+    --primary: 278 35% 66%;
+    /* #B58CC8 plum */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 3 100% 75%;
+    /* #FF857E coral */
     --secondary-foreground: 0 0% 100%;
-    --muted: 50 15% 93%;
-    --muted-foreground: 0 0% 38%;
-    --accent: 42 77% 60%;
-    /* #E6B84E — enzyme gold */
-    --accent-foreground: 281 50% 24%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    /* #666 */
+    --accent: 43 83% 67%;
+    /* #F0C965 gold */
+    --accent-foreground: 260 21% 6%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 50 10% 88%;
-    --input: 50 10% 88%;
-    --ring: 281 50% 24%;
-    --radius: 0.75rem;
-
-    /* Custom palette aliases */
-    --bio-plum: 281 50% 24%;
-    --soft-coral: 3 83% 67%;
-    --enzyme-gold: 42 77% 60%;
-
-    /* Sidebar */
-    --sidebar-background: 50 30% 97%;
-    --sidebar-foreground: 0 0% 9%;
-    --sidebar-primary: 281 50% 24%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 50 15% 93%;
-    --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 50 10% 88%;
-    --sidebar-ring: 281 50% 24%;
-  }
-
-  .dark {
-    /* Bio-Impact Dark Theme — Personal Brand */
-    --background: 260 21% 5%;
-    /* #0D0B10 */
-    --foreground: 0 0% 96%;
-    /* #F4F4F4 */
-    --card: 262 17% 9%;
-    /* #16131B */
-    --card-foreground: 0 0% 96%;
-    --popover: 262 17% 9%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 278 35% 66%;
-    /* #B58CC8 */
-    --primary-foreground: 260 21% 5%;
-    --secondary: 3 100% 75%;
-    /* #FF857E */
-    --secondary-foreground: 260 21% 5%;
-    --muted: 262 14% 14%;
-    --muted-foreground: 262 10% 62%;
-    --accent: 43 83% 67%;
-    /* #F0C965 */
-    --accent-foreground: 260 21% 5%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 262 14% 18%;
-    --input: 262 14% 18%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
     --ring: 278 35% 66%;
+    --radius: 0.5rem;
 
-    /* Custom palette aliases dark */
     --bio-plum: 278 35% 66%;
     --soft-coral: 3 100% 75%;
     --enzyme-gold: 43 83% 67%;
+  }
 
-    /* Sidebar dark */
-    --sidebar-background: 260 21% 5%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 278 35% 66%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 14% 14%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 262 14% 18%;
-    --sidebar-ring: 278 35% 66%;
+  .dark {
+    /* Palmer Dark Theme (default) */
+    --background: 260 21% 4%;
+    /* #0D0B10 */
+    --foreground: 0 0% 96%;
+    /* #F4F4F4 */
+    --card: 262 17% 8%;
+    /* #141118 */
+    --card-foreground: 0 0% 96%;
+    --popover: 262 17% 8%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 278 35% 66%;
+    /* #B58CC8 plum */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 3 100% 75%;
+    /* #FF857E coral */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 262 12% 12%;
+    --muted-foreground: 0 0% 60%;
+    /* #999 */
+    --accent: 43 83% 67%;
+    /* #F0C965 gold */
+    --accent-foreground: 260 21% 4%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 13%;
+    /* #222 */
+    --input: 0 0% 13%;
+    --ring: 278 35% 66%;
+
+    --bio-plum: 278 35% 66%;
+    --soft-coral: 3 100% 75%;
+    --enzyme-gold: 43 83% 67%;
   }
 }
 
@@ -115,39 +96,37 @@
   h4,
   h5,
   h6 {
-    font-family: 'Sora', system-ui, sans-serif;
-    font-weight: 500;
-  }
-
-  code,
-  pre,
-  .mono {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer utilities {
 
-  /* Typography utilities */
+  /* Font utilities */
   .font-display {
-    font-family: 'Sora', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
 
   .font-body {
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+  /* Palmer section label — small muted annotation text */
+  .section-label {
+    @apply text-xs font-medium uppercase tracking-widest text-muted-foreground;
+    letter-spacing: 0.15em;
   }
 
-  /* Text gradient — brand signature plum → coral */
+  /* Text gradient — brand plum → coral */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
   }
 
-  /* Text gradient — brand signature plum → coral → gold */
   .text-gradient-brand {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
@@ -159,74 +138,44 @@
     @apply bg-background/80 backdrop-blur-xl;
   }
 
-  /* Subtle shadow */
-  .shadow-subtle {
-    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.06);
+  /* Rolling text hover — Palmer signature */
+  .rolling-text {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
   }
 
-  .shadow-elevated {
-    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
+  .rolling-text span {
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Glow effects for brand accent */
-  .glow-primary {
-    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.35);
+  .rolling-text:hover span {
+    transform: translateY(-100%);
   }
 
-  .glow-accent {
-    box-shadow: 0 0 30px -5px hsl(var(--accent) / 0.35);
+  .rolling-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+  .rolling-text:hover::after {
+    transform: translateY(-100%);
   }
 
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+  /* Marquee animation for tickers */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
-  .animate-slide-in-left {
-    animation: slideInLeft 0.6s ease-out forwards;
-  }
-
-  .animate-slide-in-right {
-    animation: slideInRight 0.6s ease-out forwards;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.4s ease-out forwards;
-  }
-
-  /* Stagger delays */
-  .delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .delay-500 {
-    animation-delay: 500ms;
-  }
-
-  /* Hover lift effect */
-  .hover-lift {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px -12px hsl(var(--primary) / 0.2);
+  .marquee-inner {
+    display: flex;
+    animation: marquee 30s linear infinite;
   }
 
   /* Link underline animation */
@@ -243,35 +192,18 @@
     @apply w-full;
   }
 
-  /* Brand accent underline — uses gold */
-  .brand-underline {
-    @apply relative;
-  }
-
-  .brand-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 transition-all duration-300;
-    height: 2px;
-    background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--secondary)));
-    border-radius: 1px;
-  }
-
-  .brand-underline:hover::after {
-    @apply w-full;
-  }
-
   /* Grain texture overlay */
   .grain::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.02;
+    opacity: 0.015;
     pointer-events: none;
     z-index: 1;
   }
 
-  /* Focus visible styles */
+  /* Focus visible */
   .focus-ring {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
@@ -289,7 +221,7 @@
   }
 }
 
-/* Keyframe animations */
+/* Keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -348,6 +280,16 @@
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes float {
 
   0%,
@@ -386,10 +328,10 @@
   }
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -397,16 +339,16 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
-  border-radius: 4px;
+  background: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background: hsl(var(--muted-foreground) / 0.4);
 }
 
 /* Selection */
 ::selection {
-  background: hsl(var(--primary) / 0.2);
+  background: hsl(var(--primary) / 0.25);
   color: hsl(var(--foreground));
 }
