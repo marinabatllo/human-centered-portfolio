@@ -24,7 +24,7 @@ function ProjectRow({ project, index }: { project: typeof featured[0]; index: nu
         className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-16 border-b border-border items-center hover:bg-foreground/[0.01] transition-colors"
       >
         <div className="lg:col-span-1 font-mono text-xs opacity-20">
-          REF_{index + 1}
+          {String(index + 1).padStart(2, '0')}
         </div>
         <div className="lg:col-span-6">
           <h4 className="text-3xl md:text-5xl font-light tracking-tight mb-4 group-hover:pl-4 transition-all duration-500">
@@ -50,7 +50,7 @@ function ProjectRow({ project, index }: { project: typeof featured[0]; index: nu
         <div className="lg:col-span-2 flex justify-end">
           <div className="text-right">
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] block mb-1 opacity-30">
-              Key Metric
+              Domain
             </span>
             <span
               className="text-2xl font-serif italic"
@@ -69,7 +69,7 @@ export function FeaturedProjects() {
   return (
     <section>
       <Reveal>
-        <SectionHeader id="01" title="Clinical Trials & Case Studies" />
+        <SectionHeader id="01" title="Selected Work" />
       </Reveal>
 
       <div className="grid grid-cols-1 gap-12">

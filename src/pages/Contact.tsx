@@ -7,7 +7,7 @@ export function Contact() {
 
   return (
     <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10 space-y-32">
-      <SectionHeader id="C1" title="Initiate Contact" />
+      <SectionHeader id="C1" title="Get in Touch" />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
         {/* Left — Info */}
@@ -55,7 +55,7 @@ export function Contact() {
         {/* Right — Form */}
         <div className="lg:col-span-7">
           <span className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-40 block mb-12">
-            Transmission // Form
+            Message // Form
           </span>
           <form
             onSubmit={(e) => {
@@ -102,7 +102,7 @@ export function Contact() {
               className="group relative px-10 py-5 rounded-sm border border-foreground overflow-hidden transition-all hover:bg-foreground hover:text-background"
             >
               <span className="relative z-10 font-mono text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-3">
-                Transmit <ArrowRight size={16} />
+                Send <ArrowRight size={16} />
               </span>
             </button>
           </form>

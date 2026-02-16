@@ -7,23 +7,23 @@ import { Plus } from 'lucide-react';
 const faqs = [
   {
     question: 'What kind of projects do you work on?',
-    answer: 'I focus on data-intensive projects at the intersection of ML engineering, human-centered design, and product strategy — from healthcare analytics platforms to enterprise BI transformations.',
+    answer: 'I work across AI/ML, data engineering, and product design — from building classification models and automated pipelines to designing user-facing analytics tools. My projects span healthcare, FMCG, and enterprise tech.',
   },
   {
     question: 'What is your technical stack?',
-    answer: 'Python (TensorFlow, scikit-learn, PyTorch), SQL, React/TypeScript for UIs, Docker for deployment, and cloud services (AWS, Azure, Databricks). I pick tools that fit the problem.',
+    answer: 'Python (TensorFlow, scikit-learn, PyTorch) for ML, SQL and Airflow for data engineering, React/TypeScript for frontends, Docker/AWS for deployment, and Figma for design. I pick tools that fit the problem.',
   },
   {
     question: 'Can you handle both design and development?',
-    answer: 'Yes — my MSc in HCI and engineering background means I can go from user research and interface design to building production ML pipelines, all within the same project.',
+    answer: 'Yes — my MSc in Human-Computer Interaction and Bioengineering background means I can go from user research and interface design to building production ML pipelines, all within the same project.',
   },
   {
     question: 'What industries have you worked in?',
-    answer: 'Healthcare/biotech (VITALA, biomarker research), FMCG consulting (Bimbo, Danone, Suntory), and tech startups. My approach adapts to domain-specific challenges.',
+    answer: 'Healthcare & biotech (VITALA, university research labs), FMCG consulting (Bimbo, Danone, Suntory via Accenture), and tech startups. My approach adapts to domain-specific challenges.',
   },
   {
-    question: 'Are you open to full-time or freelance work?',
-    answer: 'I\'m open to both full-time positions and freelance/consulting engagements, particularly in health tech, AI products, and data-driven organizations.',
+    question: 'Are you open to new opportunities?',
+    answer: 'I\'m open to both full-time positions and freelance/consulting engagements, particularly in AI products, data-driven organizations, and health tech.',
   },
 ];
 
@@ -102,7 +102,7 @@ export function CTABanner() {
         }}
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-30 italic block mb-8">
-          Final Protocol // Initiate Contact
+          Ready to collaborate?
         </span>
         <Link
           to="/contact"

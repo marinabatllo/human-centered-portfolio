@@ -28,7 +28,7 @@ export function Projects() {
 
   return (
     <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10">
-      <SectionHeader id="A1" title="All Clinical Trials" />
+      <SectionHeader id="A1" title="All Projects" />
 
       {/* Search + Sort */}
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
@@ -36,7 +36,7 @@ export function Projects() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 opacity-30" />
           <input
             type="text"
-            placeholder="Search trials..."
+            placeholder="Search projects..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-11 pr-4 py-4 bg-transparent border-b border-border font-mono text-xs uppercase tracking-wider placeholder:opacity-30 focus:outline-none focus:border-primary transition-colors"
@@ -65,8 +65,8 @@ export function Projects() {
             key={tag}
             onClick={() => toggleTag(tag)}
             className={`font-mono text-[9px] px-3 py-1.5 rounded-sm uppercase tracking-wider transition-all ${selectedTags.includes(tag)
-                ? 'bg-foreground text-background'
-                : 'bg-foreground/5 opacity-40 hover:opacity-100'
+              ? 'bg-foreground text-background'
+              : 'bg-foreground/5 opacity-40 hover:opacity-100'
               }`}
           >
             {tag}

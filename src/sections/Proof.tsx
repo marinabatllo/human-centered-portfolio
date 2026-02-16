@@ -2,9 +2,9 @@ import { Brain, Activity, Database } from 'lucide-react';
 import { useInView, useCountUp } from '@/hooks/useAnimations';
 
 const metrics = [
-  { label: 'Classification Model', val: '90%', sub: 'Pain detection accuracy', Icon: Brain },
-  { label: 'Pipeline Efficiency', val: '8x', sub: 'Throughput optimization', Icon: Activity },
-  { label: 'Processing Latency', val: '-75%', sub: 'Data delivery speed', Icon: Database },
+  { label: 'AI Classification Accuracy', val: '92%', sub: 'Pain detection model (preclinical research)', Icon: Brain },
+  { label: 'Efficiency Improvement', val: '8x', sub: 'Experimental throughput optimization', Icon: Activity },
+  { label: 'Data Delivery Speed', val: '-75%', sub: 'Processing latency for analytics pipelines', Icon: Database },
 ];
 
 function MetricCard({ m, index }: { m: typeof metrics[0]; index: number }) {
