@@ -1,4 +1,5 @@
 import { Hero } from '@/sections/Hero';
+import { TechCarousel } from '@/components/ui-custom/TechCarousel';
 import { Proof } from '@/sections/Proof';
 import { FeaturedProjects } from '@/sections/FeaturedProjects';
 import { Pillars } from '@/sections/Pillars';
@@ -18,6 +19,7 @@ export function Home() {
       {/* Content with generous clinical spacing */}
       <div className="max-w-7xl mx-auto px-8 relative z-10 space-y-64 pt-24">
         <Hero />
+        <TechCarousel />
         <Proof />
         <FeaturedProjects />
         <Pillars />
