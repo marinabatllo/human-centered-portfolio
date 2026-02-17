@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from '@/lib/router';
 import { Reveal } from '@/components/ui-custom/Reveal';
-import { HeroAnimation } from '@/components/ui-custom/HeroAnimation';
 
 export function Hero() {
   return (
@@ -53,9 +52,21 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Custom localized background animation */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <HeroAnimation />
+      {/* Custom localized background video */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/assets/hero-poster.jpg"
+        >
+          <source src="/src/videos/Video_de_Partículas_Animadas_Cerebro_a_Chip.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Subtle overlay to soften the video and ensure title readability */}
+        <div className="absolute inset-0 bg-background/20 backdrop-blur-[2px]" />
       </div>
     </section>
   );
