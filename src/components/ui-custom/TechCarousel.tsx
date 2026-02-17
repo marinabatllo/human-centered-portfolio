@@ -34,7 +34,7 @@ export function TechCarousel() {
     return (
         <div
             ref={ref}
-            className="relative overflow-hidden py-16 border-y border-border/10 bg-background/50 backdrop-blur-sm"
+            className="relative overflow-hidden py-8 border-y border-border/10 bg-background/50 backdrop-blur-sm"
             style={{
                 opacity: isInView ? 1 : 0,
                 transition: 'opacity 1000ms cubic-bezier(0.16,1,0.3,1)',
@@ -58,7 +58,7 @@ export function TechCarousel() {
                             <img
                                 src={theme === 'dark' ? tech.darkIcon : tech.lightIcon}
                                 alt={tech.name}
-                                className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                                className="w-full h-full object-contain transition-all duration-500"
                             />
                         </div>
                         <span className="font-mono text-[9px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-40 transition-opacity duration-500 whitespace-nowrap">
