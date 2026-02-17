@@ -208,7 +208,7 @@ export function About() {
   const [isCVOpen, setIsCVOpen] = useState(false);
 
   return (
-    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10 space-y-24">
+    <div className="w-full mx-auto px-[5vw] pt-32 pb-20 relative z-10 space-y-24">
       <SectionHeader id="02" title="About Me" />
 
       {/* Download CV button */}

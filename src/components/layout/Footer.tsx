@@ -7,14 +7,14 @@ export function Footer() {
   return (
     <footer
       ref={ref}
-      className="mt-28 border-t border-border py-24 px-8"
+      className="mt-28 border-t border-border py-24 px-[5vw]"
       style={{
         opacity: isInView ? 1 : 0,
         transform: isInView ? 'translateY(0)' : 'translateY(40px)',
         transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1), transform 800ms cubic-bezier(0.16,1,0.3,1)',
       }}
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+      <div className="w-full mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
         <div className="space-y-8">
           <h4 className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-30 italic">
             Endpoint // Contact

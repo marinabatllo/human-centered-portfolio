@@ -27,7 +27,7 @@ export function Projects() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-8 pt-32 pb-20 relative z-10">
+    <div className="w-full mx-auto px-[5vw] pt-32 pb-20 relative z-10">
       <SectionHeader id="A1" title="All Projects" />
 
       {/* Search + Sort */}

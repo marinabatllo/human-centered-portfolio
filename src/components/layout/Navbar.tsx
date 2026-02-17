@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-24 flex items-center bg-transparent backdrop-blur-sm border-b border-border">
-      <nav className="max-w-7xl mx-auto px-8 w-full flex justify-between items-center">
+      <nav className="w-full mx-auto px-[5vw] flex justify-between items-center">
         {/* Logo: Monogram circle + mono name */}
         <Link to="/" className="group flex items-center gap-3">
           <div className="w-8 h-8 rounded-full border border-foreground flex items-center justify-center font-bold text-xs group-hover:bg-foreground group-hover:text-background transition-all duration-300">
@@ -83,7 +83,7 @@ export function Navbar() {
         className={`md:hidden absolute top-24 left-0 right-0 bg-background border-b border-border overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 py-6' : 'max-h-0'
           }`}
       >
-        <div className="max-w-7xl mx-auto px-8 flex flex-col gap-4">
+        <div className="w-full mx-auto px-[5vw] flex flex-col gap-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}

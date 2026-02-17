@@ -7,11 +7,11 @@ import { getProjectBySlug, getImpactBadgeColor, getTechnicalBadgeColor } from '@
 
 export function ProjectDetail() {
   const { currentPath, navigate } = useRouter();
-  
+
   // Extract slug from path /projects/:slug
   const pathParts = currentPath.split('/').filter(Boolean);
   const slug = pathParts.length >= 2 ? pathParts[1] : '';
-  
+
   const project = slug ? getProjectBySlug(slug) : undefined;
 
   if (!project) {
@@ -22,7 +22,7 @@ export function ProjectDetail() {
 
   return (
     <div className="py-12 lg:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-[5vw]">
         {/* Back button */}
         <AnimatedSection className="mb-8">
           <Link to="/projects">

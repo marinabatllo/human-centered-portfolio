@@ -17,8 +17,10 @@ export function Home() {
       <div className="precision-line-right hidden xl:block" />
 
       {/* Content with generous clinical spacing */}
-      <div className="max-w-7xl mx-auto px-8 relative z-10 space-y-28 pt-24">
-        <Hero />
+      <Hero />
+
+      {/* Content with generous clinical spacing */}
+      <div className="mx-auto px-[5vw] relative z-10 space-y-28 pb-28">
         <TechCarousel />
         <Proof />
         <FeaturedProjects />
